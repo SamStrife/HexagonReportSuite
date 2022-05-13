@@ -2,6 +2,7 @@ import pyodbc
 import pandas as pd
 from dotenv import load_dotenv
 import os
+import utils.database.column_selectors as cols
 
 load_dotenv()
 
@@ -34,23 +35,19 @@ query = {
     "hire_query": f"Select * from {database['hires']};"
 }
 
-wanted_columns = "\"Manufacturer Name\" as manufacturer,\
-                    \"Model Name\"  as model,\
-                    \"Vehicle Type Name\" as vehicleType,\
-                    \"Vehicle Status Name\" as status,\
-                    \"Vehicle Sub Status Name\" as subStatus,\
-                    \"Customer Name\" as customer,\
-                    \"Current Mileage\" as mileage,\
-                    \"Next Inspection Date\" as inspectionDue,\
-                    \"Next MOT Date\" as motDue,\
-                    \"Next Tacho Calibration Date\" as tachoDue,\
-                    \"Location\" as location"
-
-
 def get_vehicle_details(registration):
     cnxn = pyodbc.connect(
         'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + connection['server'] + ';DATABASE=' + connection['database'] + ';UID=' + connection['username'] + ';PWD=' + connection['password'])
     data = pd.read_sql(
-        f"Select {wanted_columns}  from {database['vehicles']} where \"Vehicle Registration\" = '{registration}';",
+        f"Select {cols.vehicle_details}  from {database['vehicles']} where \"Vehicle Registration\" = '{registration}';",
+        cnxn)
+    return data
+
+
+def test():
+    cnxn = pyodbc.connect(
+        'DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + connection['server'] + ';DATABASE=' + connection['database'] + ';UID=' + connection['username'] + ';PWD=' + connection['password'])
+    data = pd.read_sql(
+        f"Select {cols.supplier_spend_columns} from {database['jobs']};",
         cnxn)
     return data

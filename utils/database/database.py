@@ -3,6 +3,7 @@ import pandas as pd
 from dotenv import load_dotenv
 import os
 import utils.database.column_selectors as cols
+import utils.database.queries as query
 
 load_dotenv()
 
@@ -28,12 +29,6 @@ database = {
     "jobs": "soWorkshop_Job_Report"
 }
 
-query = {
-    "vehicle_query": f"Select * from {database['vehicles']};",
-    "purchase_order_query": f"Select * from {database['purchaseOrders']};",
-    "job_query": f"Select * from {database['jobs']};",
-    "hire_query": f"Select * from {database['hires']};"
-}
 
 def get_vehicle_details(registration):
     cnxn = pyodbc.connect(

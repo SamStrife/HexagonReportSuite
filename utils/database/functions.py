@@ -1,7 +1,7 @@
 import pandas as pd
 from utils.database import queries
-from utils.database import connection
+from utils.database.connection import cnxn
 
 
 def test():
-    return pd.read_sql(queries.supplier_spend, connection.cnxn)
+    return pd.read_sql(queries.supplier_spend, cnxn)

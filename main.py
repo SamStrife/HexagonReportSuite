@@ -1,4 +1,6 @@
 from utils.database import functions
+import pandas as pd
 
-test = functions.test()
-print(test)
+
+supplier_spend = functions.supplier_spend(supplier="Motus", final_costs=True)
+print(supplier_spend.head())

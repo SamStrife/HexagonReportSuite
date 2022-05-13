@@ -1,4 +1,4 @@
-from utils.database import database
+from utils.database import functions
 
-test = database.test()
+test = functions.test()
 print(test)

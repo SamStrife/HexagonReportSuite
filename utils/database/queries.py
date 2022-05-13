@@ -6,6 +6,7 @@ vehicle_query = f"Select * from {db.vehicles};"
 purchase_order_query = f"Select * from {db.purchase_orders};"
 job_query = f"Select * from {db.jobs};",
 hire_query = f"Select * from {db.hires};"
+supplier_query = f"Select * from {db.suppliers};"
 
 # More Specific Queries
 supplier_spend = f"Select {cs.supplier_spend_columns} from {db.jobs};"

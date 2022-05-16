@@ -50,4 +50,7 @@ def supplier_spend(supplier=None, final_costs=False, styling=None):
 
 def derby_yard_sheet():
     data = pd.read_sql(queries.vehicle_query, cnxn)
-    return data
+    vehicles_marked_at_derby = data[data["Location"].str.contains("Derby", na=False)]
+    vehicles_outside_of_derby = not data[data["Location"].str.contains("Derby", na=False)] and \
+                                data[data["Customer"] == "Not On Hire"]
+    return {vehicles_marked_at_derby, vehicles_outside_of_derby}

@@ -31,4 +31,23 @@ def supplier_spend(supplier=None, final_costs=False, styling=None):
         data = data[data['job_status'] == 'Complete']
     if styling:
         pass
+    data.rename(columns={
+                 "job_date": "Job Date",
+                 "registration": "Registration",
+                 "vehicle_type": "Vehicle Type",
+                 "job_type": "Job Type",
+                 "vehicle_mileage": "Vehicle Mileage",
+                 "job_status": "Job Status",
+                 "supplier": "Supplier",
+                 "customer": "Customer",
+                 "job_description": "Job Description",
+                 "recharge": "Recharge",
+                 "labour_cost": "Labour Cost",
+                 "parts_cost": "Parts Cost",
+                 "total_cost": "Total Cost"}, inplace=True)
+    return data
+
+
+def derby_yard_sheet():
+    data = pd.read_sql(queries.vehicle_query, cnxn)
     return data

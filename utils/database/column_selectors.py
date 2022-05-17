@@ -27,3 +27,19 @@ vehicle_details = \
     \"Next MOT Date\" as motDue,\
     \"Next Tacho Calibration Date\" as tachoDue,\
     \"Location\" as location"
+
+yard_sheet = \
+    "\"Unique ID\" as Vehicle_Unique_ID,\
+    \"Registration\"  as Registration,\
+    \"Vehicle Type Name\" as Vehicle_Type,\
+    \"Vehicle Status Name\" as Vehicle_Status,\
+    \"Vehicle Sub Status Name\" as Vehicle_Sub_Status,\
+    \"Customer Name\" as Customer,\
+    \"Current Mileage\" as Current_Mileage,\
+    \"Next Inspection Date\" as Vehicle_Inspection_Due,\
+    \"Next MOT Date\" as Vehicle_MOT_Due,\
+    \"Next Tacho Calibration Date\" as Vehicle_Tacho_Due,\
+    \"Location\" as Location,\
+    \"Status Changed Date\" as Status_Date"
+
+

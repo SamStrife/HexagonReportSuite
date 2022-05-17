@@ -10,3 +10,4 @@ supplier_query = f"Select * from {db.suppliers};"
 
 # More Specific Queries
 supplier_spend = f"Select {cs.supplier_spend_columns} from {db.jobs};"
+derby_yard_sheet = f"Select {cs.yard_sheet} from {db.vehicles};"

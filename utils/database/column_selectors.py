@@ -32,6 +32,8 @@ yard_sheet = \
     "\"Unique ID\" as Vehicle_Unique_ID,\
     \"Registration\"  as Registration,\
     \"Vehicle Type Name\" as Vehicle_Type,\
+    \"Manufacturer Name\" as Vehicle_Make,\
+    \"Model Name\" as Vehicle_Model,\
     \"Vehicle Status Name\" as Vehicle_Status,\
     \"Vehicle Sub Status Name\" as Vehicle_Sub_Status,\
     \"Customer Name\" as Customer,\

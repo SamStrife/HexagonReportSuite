@@ -1,4 +1,4 @@
-from utils.derby_yard_sheet import derby_yard_sheet as dys
+import derby_yard_sheet as dys
 from sqlalchemy import create_engine
 
 data = dys.derby_yard_sheet()

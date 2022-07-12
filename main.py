@@ -1,3 +1,5 @@
-import utils.functions.functions as func
 
-print(func.supplier_spend())
+from utils.asset_file.asset_file import merged_query as mq
+
+dataframe = mq()
+dataframe.to_excel('output.xlsx')

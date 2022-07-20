@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from utils.database import queries
 from utils.database.connection import cnxn
 from datetime import datetime
@@ -33,6 +32,13 @@ def merged_query():
     merged['over_under_rated_mileage_number'] = merged.apply(over_under_mileage_amount, axis=1)
     merged['over_under_rated_mileage_percentage'] = merged.apply(over_under_mileage_percent, axis=1)
     merged['power_type'] = merged.apply(determine_vehicle_power_type, axis=1)
+
+    customer_fleet_numbers = total_hexagon_fleet(merged)
+
+    merged['customer_powered_fleet'] = merged.apply(count_fleet, args=(customer_fleet_numbers, "Power Fleet"), axis=1)
+    merged['customer_trailer_fleet'] = merged.apply(count_fleet, args=(customer_fleet_numbers, "Trailer Fleet"), axis=1)
+    merged['customer_ancillary_fleet'] = merged.apply(count_fleet, args=(customer_fleet_numbers, "Ancillary Unit"), axis=1)
+    merged['customer_undefined_fleet'] = merged.apply(count_fleet, args=(customer_fleet_numbers, "Undefined"), axis=1)
     return merged
 
 
@@ -187,4 +193,9 @@ def total_hexagon_fleet(table):
     return customers_and_vehicles
 
 
-
+def count_fleet(vehicle, lookup_table, power_type):
+    customer_id = vehicle['customer_ID']
+    try:
+        return lookup_table[customer_id][power_type]
+    except:
+        return None

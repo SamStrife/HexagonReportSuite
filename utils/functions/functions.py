@@ -47,3 +47,42 @@ def supplier_spend(supplier=None, final_costs=False, styling=None):
                  "total_cost": "Total Cost"}, inplace=True)
     return data
 
+
+def determine_vehicle_power_type(vehicle):
+    match vehicle['parent_type']:
+        case "Tractorunit" \
+             | "Tonne 2 6 0 0 0kgs" \
+             | "Fridge" \
+             | "Tonne 1 8 0 0 0kgs" \
+             | "Van Or Minibus"\
+             | "Tonne 7 5 0 0kgs"\
+             | "Rigid"\
+             | "Car"\
+             | "Van Low Loader"\
+             | "Tonne 3 5 0 0kgs"\
+             | "Tonne 1 2 0 0 0kgs"\
+             | "Tonne 7 2 0 0kgs":
+            return "Power Fleet"
+        case"Trailer" | "Triaxle Fridge Trailer":
+            return "Trailer Fleet"
+        case "Forklift":
+            return "Ancillary Unit"
+        case _:
+            return "Undefined"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

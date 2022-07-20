@@ -31,6 +31,7 @@ af_vehicle_and_hire_and_customer_query = \
         af_vehicles['Customer Name'].as_('customer_name'),
         af_vehicles['Relationship Manager'].as_('relationship_manager'),
         af_vehicles['Vehicle Type Name'].as_('vehicle_type'),
+        af_vehicles['Parent Vehicle Type Name'].as_('parent_type'),
         af_vehicles['Registration'].as_('registration'),
         af_vehicles['Hire Expiry Date'].as_('hire_expiry_date'),
         af_vehicles['Customer Account Number'].as_('customer_acc_number'),
@@ -48,6 +49,7 @@ af_vehicle_and_hire_and_customer_query = \
         af_vehicles['Customer Unique ID'].as_('customer_ID'),
         af_vehicles['Hire Unique ID'].as_('hire_ID'),
         af_vehicles['Finance Agreement Number'].as_('finance_agreement_number'),
+        af_vehicles['Last Finance Unique ID'].as_('last_finance_unique_id'),
         af_customers['Account Status Name'].as_('account_status'),
         af_customers['Organisation Group Name'].as_('customer_group'),
         af_hires['Supplier Name'].as_('supplier_name'),
@@ -62,6 +64,7 @@ af_finance_query = \
     MSSQLQuery\
     .from_(af_finance)\
     .select(
+        af_finance['Unique ID'].as_('finance_id'),
         af_finance['Agreement Number'].as_('finance_agreement_number'),
         af_finance['Monthly Depreciation'].as_('monthly_depreciation'),
         af_finance['Net Book Value'].as_('net_book_value'),

@@ -1,6 +1,7 @@
 from utils.database import column_selectors as cs
 from utils.database import databases as db
 from pypika import MSSQLQuery, Table
+import pendulum
 
 # Generic Queries
 vehicle_query = f"Select * from {db.vehicles};"
@@ -81,3 +82,28 @@ af_address_query = \
         af_addresses['Postal Code'].as_('supplier_post_code'),
     )\
     .where(af_addresses['Postal Address Type Name'] == 'Operating')
+
+
+# Vehicle Spend Queries
+jobs = Table(db.jobs)
+def vehicle_spend_query(vehicle, from_date, to_date):
+    from_date = pendulum.from_format(from_date, 'DD/MM/YYYY').format('YYYYMMDD')
+    to_date = pendulum.from_format(to_date, 'DD/MM/YYYY').format('YYYYMMDD')
+    data = MSSQLQuery.from_(jobs)\
+    .select('*')\
+    .where(jobs['Status'] == 'Complete')\
+    .where(jobs['Vehicle Unique ID'] == vehicle)\
+    .where(jobs['Required'] >= from_date)\
+    .where(jobs['Required'] <= to_date)
+    return data
+
+def all_spend_split():
+    data = MSSQLQuery.from_(jobs)\
+    .select(
+    jobs['Vehicle Unique ID'].as_('vehicle_id'),
+    jobs['Required'].as_('job_date'),
+    jobs['Cost'].as_('cost')
+    )\
+    .where(jobs['Status'] == 'Complete')
+    return data
+

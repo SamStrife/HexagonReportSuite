@@ -6,3 +6,5 @@ Flask==2.1.2
 pyodbc==4.0.32
 python-dotenv==0.20.0
 SQLAlchemy==1.4.36
+pendulum==2.1.2
+PyPika==0.48.9

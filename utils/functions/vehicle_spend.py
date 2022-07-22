@@ -33,16 +33,19 @@ def calculate_all_spend(table):
         months = row[1][3]
         if vehicle_id in _vehicle_spend.keys():
             if months >= 0 and months < 3:
+                #if 3 exists or not
                 _vehicle_spend[vehicle_id]['3'] += job_cost
-            elif months >= 0 and months < 12:
+            elif months >= 3 and months < 12:
+                #if 12 exists or not
                 _vehicle_spend[vehicle_id]['12'] += job_cost
             else:
+                #if life exists or not
                 _vehicle_spend[vehicle_id]['Life'] += job_cost
         else:
             if months >= 0 and months < 3:
                 _vehicle_spend[vehicle_id] = {}
                 _vehicle_spend[vehicle_id]['3'] = job_cost
-            elif months >= 0 and months < 12:
+            elif months >= 3 and months < 12:
                 _vehicle_spend[vehicle_id] = {}
                 _vehicle_spend[vehicle_id]['12'] = job_cost
             else:

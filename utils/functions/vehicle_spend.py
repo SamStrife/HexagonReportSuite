@@ -32,16 +32,28 @@ def calculate_all_spend(table):
         job_cost = row[1][2]
         months = row[1][3]
         if vehicle_id in _vehicle_spend.keys():
-            _vehicle_spend[vehicle_id]['spend'] += job_cost
+            if months >= 0 and months < 3:
+                _vehicle_spend[vehicle_id]['3'] += job_cost
+            elif months >= 0 and months < 12:
+                _vehicle_spend[vehicle_id]['12'] += job_cost
+            else:
+                _vehicle_spend[vehicle_id]['Life'] += job_cost
         else:
-            _vehicle_spend[vehicle_id] = {}
-            _vehicle_spend[vehicle_id]['spend'] = job_cost
+            if months >= 0 and months < 3:
+                _vehicle_spend[vehicle_id] = {}
+                _vehicle_spend[vehicle_id]['3'] = job_cost
+            elif months >= 0 and months < 12:
+                _vehicle_spend[vehicle_id] = {}
+                _vehicle_spend[vehicle_id]['12'] = job_cost
+            else:
+                _vehicle_spend[vehicle_id] = {}
+                _vehicle_spend[vehicle_id]['Life'] = job_cost
     return _vehicle_spend
 
 
 def calculate_three_month_spend(vehicle, lookup_table):
     vehicle_id = vehicle['vehicle_id']
     try:
-        return lookup_table[vehicle_id]['spend']
+        return lookup_table[vehicle_id]['3']
     except:
         return None

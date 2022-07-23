@@ -20,8 +20,8 @@ def merged_query():
         how="left",
         left_on="last_finance_unique_id",
         right_on="finance_id")
-    merged['Current_Contract_Expiry_Month'] = merged.apply(contract_expiry_month, axis=1)
-    merged['Current_Contract_Expiry_Year'] = merged.apply(contract_expiry_year, axis=1)
+    merged['Current_Contract_Expiry_Month'] = merged.apply(lambda x: x['hire_expiry_date'].month, axis=1)
+    merged['Current_Contract_Expiry_Year'] = merged.apply(lambda x: x['hire_expiry_date'].year, axis=1)
     merged['Contract_Billing_Amount_Monthly'] = merged.apply(contract_billing_amount_monthly, axis=1)
     merged['Contract_Billing_Amount_Weekly'] = merged.apply(contract_billing_amount_weekly, axis=1)
     merged['Contract_Billing_Amount_Annually'] = merged.apply(contract_billing_amount_yearly,  axis=1)
@@ -30,27 +30,21 @@ def merged_query():
     merged['daily_mileage'] = merged.apply(daily_mileage, axis=1)
     merged['projected_end_mileage'] = merged.apply(projected_end_mileage, axis=1)
     merged['rated_mileage_at_reading_date'] = merged.apply(rated_mileage_at_reading_date, axis=1)
-    merged['over_under_rated_mileage_number'] = merged.apply(over_under_mileage_amount, axis=1)
+    merged['over_under_rated_mileage_number'] = \
+        merged.apply(lambda x: x['mileage'] - x['rated_mileage_at_reading_date'], axis=1)
     merged['over_under_rated_mileage_percentage'] = merged.apply(over_under_mileage_percent, axis=1)
     merged['power_type'] = merged.apply(determine_vehicle_power_type, axis=1)
     customer_fleet_numbers = total_hexagon_fleet(merged)
     merged['customer_powered_fleet'] = merged.apply(count_fleet, args=(customer_fleet_numbers, "Power Fleet"), axis=1)
     merged['customer_trailer_fleet'] = merged.apply(count_fleet, args=(customer_fleet_numbers, "Trailer Fleet"), axis=1)
-    merged['customer_ancillary_fleet'] = merged.apply(count_fleet, args=(customer_fleet_numbers, "Ancillary Unit"), axis=1)
+    merged['customer_ancillary_fleet'] = \
+        merged.apply(count_fleet, args=(customer_fleet_numbers, "Ancillary Unit"), axis=1)
     merged['customer_undefined_fleet'] = merged.apply(count_fleet, args=(customer_fleet_numbers, "Undefined"), axis=1)
     spend_split = all_fleet_split()
     merged['3_month_spend'] = merged.apply(lookup_spend_split,args=(spend_split,'3'), axis=1)
     merged['12_month_spend'] = merged.apply(lookup_spend_split, args=(spend_split, '12'), axis=1)
     merged['life_spend'] = merged.apply(lookup_spend_split, args=(spend_split, 'Life'), axis=1)
     return merged
-
-
-def contract_expiry_month(vehicle):
-    return vehicle['hire_expiry_date'].month
-
-
-def contract_expiry_year(vehicle):
-    return vehicle['hire_expiry_date'].year
 
 
 def contract_billing_amount_monthly(vehicle):
@@ -81,58 +75,43 @@ def contract_billing_amount_yearly(vehicle):
 
 
 def days_on_rent(vehicle):
-    start_date = vehicle['hire_start_date']
-    todays_date = datetime.now()
+    _start_date = vehicle['hire_start_date']
+    today = datetime.now()
     original_hire_date = vehicle['original_hire_date']
-    days_on_rent = None
+    _days_on_rent = None
 
     if pd.notnull(original_hire_date):
-        start_date = original_hire_date
-
-    days_on_rent = (todays_date - start_date).total_seconds() / 86400
+        _start_date = original_hire_date
+    _days_on_rent = (today - _start_date).total_seconds() / 86400
 
     try:
-        days_on_rent = round(days_on_rent)
+        _days_on_rent = round(_days_on_rent)
     except:
-        days_on_rent = None
+        _days_on_rent = None
 
-    return days_on_rent
+    return _days_on_rent
 
 
 def mileage_difference(vehicle):
     start_mileage = vehicle['hire_start_mileage']
-    current_mileage = vehicle['mileage']
-    original_hire_mileage = vehicle['original_hire_mileage']
 
-    if pd.notnull(original_hire_mileage):
-        start_mileage = original_hire_mileage
+    if pd.notnull(vehicle['original_hire_mileage']):
+        start_mileage = vehicle['original_hire_mileage']
 
-    return current_mileage - start_mileage
+    return vehicle['mileage'] - start_mileage
 
 
 def daily_mileage(vehicle):
-    _mileage_difference = vehicle['mileage_difference']
-    _days_on_rent = vehicle['Days_On_Rent']
-    daily_mileage = None
-
     try:
-        daily_mileage = _mileage_difference / _days_on_rent
+        _daily_mileage = round(vehicle['mileage_difference'] / vehicle['Days_On_Rent'])
     except:
-        daily_mileage = None
+        _daily_mileage = None
 
-    try:
-        daily_mileage = round(daily_mileage)
-    except:
-        daily_mileage = None
-    return daily_mileage
+    return _daily_mileage
 
 
 def projected_end_mileage(vehicle):
-    todays_date = datetime.now()
-    hire_end_date = vehicle['hire_expiry_date']
-    days_until_end = (hire_end_date - todays_date).total_seconds() / 86400
-    projected_additional_mileage = None
-    projected_end_mileage = None
+    days_until_end = (vehicle['hire_expiry_date'] - datetime.now()).total_seconds() / 86400
 
     try:
         days_until_end = round(days_until_end)
@@ -153,24 +132,16 @@ def projected_end_mileage(vehicle):
 
 
 def rated_mileage_at_reading_date(vehicle):
-    annual_mileage_allowance = vehicle['contract_annual_mileage']
-    daily_allowance = annual_mileage_allowance / 365
-    days_on_rent = vehicle['Days_On_Rent']
+    daily_allowance = vehicle['contract_annual_mileage'] / 365
     start_mileage = vehicle['hire_start_mileage']
-    original_hire_mileage = vehicle['original_hire_mileage']
 
-    if pd.notnull(original_hire_mileage):
-        start_mileage = original_hire_mileage
+    if pd.notnull(vehicle['original_hire_mileage']):
+        start_mileage = vehicle['original_hire_mileage']
 
-    expected_mileage = start_mileage + (daily_allowance * days_on_rent)
     try:
-        return round(expected_mileage)
+        return round(start_mileage + (daily_allowance * vehicle['Days_On_Rent']))
     except:
-        return expected_mileage
-
-
-def over_under_mileage_amount(vehicle):
-    return vehicle['mileage'] - vehicle['rated_mileage_at_reading_date']
+        return None
 
 
 def over_under_mileage_percent(vehicle):
@@ -197,16 +168,14 @@ def total_hexagon_fleet(table):
 
 
 def count_fleet(vehicle, lookup_table, power_type):
-    customer_id = vehicle['customer_ID']
     try:
-        return lookup_table[customer_id][power_type]
+        return lookup_table[vehicle['customer_ID']][power_type]
     except:
         return None
 
 
 def lookup_spend_split(vehicle, lookup_table, month):
-    vehicle_id = vehicle['vehicle_id']
     try:
-        return lookup_table[vehicle_id][month]
+        return lookup_table[vehicle['vehicle_id']][month]
     except:
         return None

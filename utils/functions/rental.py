@@ -1,3 +1,13 @@
+def calculate_yearly_hire_rate(rate: int, frequency: str) -> int:
+    """Takes an int (rate) and string(frequency) and returns the yearly hire cost for a vehicle"""
+    if frequency.lower() == "monthly":
+        return int(rate*12)
+    if frequency.lower() == "weekly":
+        return int(rate*52)
+    if frequency.lower() != "monthly" or frequency.lower() != "weekly":
+        raise TypeError("Please ensure billing frequency is set to either 'weekly' or 'monthly'")
+
+
 def calculate_monthly_hire_rate(rate: int, frequency: str) -> int:
     """Takes an int (rate) and string(frequency) and returns the monthly hire cost for a vehicle"""
     if frequency.lower() == "monthly":

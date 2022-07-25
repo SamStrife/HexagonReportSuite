@@ -4,6 +4,7 @@ from utils.database.connection import cnxn
 from datetime import datetime
 from utils.functions.functions import determine_vehicle_power_type
 from utils.functions.vehicle_spend import all_fleet_split
+from utils.functions.hire_splitter import report_for_hire_splitter
 
 
 def merged_query():
@@ -44,6 +45,10 @@ def merged_query():
     merged['3_month_spend'] = merged.apply(lookup_spend_split,args=(spend_split,'3'), axis=1)
     merged['12_month_spend'] = merged.apply(lookup_spend_split, args=(spend_split, '12'), axis=1)
     merged['life_spend'] = merged.apply(lookup_spend_split, args=(spend_split, 'Life'), axis=1)
+    revenue_split = report_for_hire_splitter()
+    merged['3_month_revenue'] = merged.apply(lookup_revenue_split,args=(revenue_split,'3'), axis=1)
+    merged['12_month_revenue'] = merged.apply(lookup_revenue_split, args=(revenue_split, '12'), axis=1)
+    merged['life_revenue'] = merged.apply(lookup_revenue_split, args=(revenue_split, 'Life'), axis=1)
     return merged
 
 
@@ -154,8 +159,8 @@ def over_under_mileage_percent(vehicle):
 def total_hexagon_fleet(table):
     customers_and_vehicles = {}
     for row in table.iterrows():
-        customer_id = row[1][18]
-        power_type = row[1][50]
+        customer_id = row[1][19]
+        power_type = row[1][51]
         if customer_id in customers_and_vehicles.keys():
             if power_type in customers_and_vehicles[customer_id].keys():
                 customers_and_vehicles[customer_id][power_type] += 1
@@ -175,6 +180,13 @@ def count_fleet(vehicle, lookup_table, power_type):
 
 
 def lookup_spend_split(vehicle, lookup_table, month):
+    try:
+        return lookup_table[vehicle['vehicle_id']][month]
+    except:
+        return None
+
+
+def lookup_revenue_split(vehicle, lookup_table, month):
     try:
         return lookup_table[vehicle['vehicle_id']][month]
     except:

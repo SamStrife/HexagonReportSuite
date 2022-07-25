@@ -3,8 +3,11 @@ from utils.database import queries
 from utils.database.connection import cnxn
 from datetime import date
 
-# single_vehicle_query = str(queries.vehicle_spend_query(vehicle=1406, from_date="01/01/2022", to_date="01/02/2022"))
-# vehicle_spend = pd.read_sql(single_vehicle_query, cnxn)
+single_vehicle_query = str(queries.vehicle_spend_query(vehicle=1406, from_date="01/01/2022", to_date="01/02/2022"))
+
+
+def vehicle_spend():
+    pd.read_sql(single_vehicle_query, cnxn)
 
 
 def all_fleet_split():

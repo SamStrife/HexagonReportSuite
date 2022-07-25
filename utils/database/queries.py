@@ -86,8 +86,8 @@ af_address_query = \
 
 
 # Vehicle Spend Queries
-jobs = Table(db.jobs)
 def vehicle_spend_query(vehicle, from_date, to_date):
+    jobs = Table(db.jobs)
     from_date = pendulum.from_format(from_date, 'DD/MM/YYYY').format('YYYYMMDD')
     to_date = pendulum.from_format(to_date, 'DD/MM/YYYY').format('YYYYMMDD')
     data = MSSQLQuery.from_(jobs)\
@@ -99,6 +99,7 @@ def vehicle_spend_query(vehicle, from_date, to_date):
     return data
 
 def all_spend_split():
+    jobs = Table(db.jobs)
     data = MSSQLQuery.from_(jobs)\
     .select(
     jobs['Vehicle Unique ID'].as_('vehicle_id'),
@@ -107,4 +108,38 @@ def all_spend_split():
     )\
     .where(jobs['Status'] == 'Complete')
     return data
+
+
+#Hire Queries
+def hires_for_splitter_report():
+    hires = Table(db.hires)
+    data = MSSQLQuery.from_(hires)\
+    .select(
+        hires['Unique ID'].as_('hire_ID'),
+        hires['Vehicle Unique ID'].as_('vehicle_ID'),
+        hires['Customer Unique ID'].as_('customer_ID'),
+        hires['Live'].as_('live'),
+        hires['Sales'].as_('sales'),
+        hires['Billing Frequency Name'].as_('frequency'),
+        hires['Agreement Number'].as_('agreement_number'),
+        hires['Hire Start Date'].as_('hire_start'),
+        hires['Hire Expiry Date'].as_('hire_expiry'),
+        hires['End Of Hire'].as_('hire_end'),
+        hires['Original Agreement Number'].as_('original_agreement_number'),
+        hires['Original Hire Date'].as_('original_hire_start_date'),
+        hires['Original Start Mileage'].as_('original_hire_start_mileage')
+    )
+    return data
+
+
+
+
+
+
+
+
+
+
+
+
 

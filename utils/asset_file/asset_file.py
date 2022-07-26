@@ -40,7 +40,9 @@ def asset_file_generation(tidy_names=False):
         df.apply(lambda x: x['mileage'] - x['rated_mileage_at_reading_date'], axis=1)
     df['over_under_rated_mileage_percentage'] = df.apply(over_under_mileage_percent, axis=1)
     df['power_type'] = df.apply(determine_vehicle_power_type, axis=1)
+
     customer_fleet_numbers = total_hexagon_fleet(df)
+
     df['customer_powered_fleet'] = df.apply(count_fleet, args=(customer_fleet_numbers, "Power Fleet"), axis=1)
     df['customer_trailer_fleet'] = df.apply(count_fleet, args=(customer_fleet_numbers, "Trailer Fleet"), axis=1)
     df['customer_ancillary_fleet'] = df.apply(count_fleet, args=(customer_fleet_numbers, "Ancillary Unit"), axis=1)

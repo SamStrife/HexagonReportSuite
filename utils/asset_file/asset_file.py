@@ -352,8 +352,8 @@ def twelve_month_margin_percent(vehicle) -> int | None:
         return None
 
 
-def life_margin_percent(vehicle) -> int | None:
+def life_margin_percent(vehicle) -> float | None:
     try:
-        return int((vehicle['life_revenue'] - vehicle['life_spend']) / vehicle['life_revenue'] * 100)
+        return (vehicle['life_revenue'] - vehicle['life_spend']) / vehicle['life_revenue']
     except:
         return None

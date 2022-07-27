@@ -1,213 +1,1209 @@
 cell_format = \
     {
         'Customer Group':
-            {'header_colour': '#383837',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                {
+                    'bold': True,
+                    'text_wrap': False,
+                    'valign': 'top',
+                    'fg_color': '#383837',
+                    'color': '#ffffff',
+                    'border': 1
+                },
+                'data_format':
+                {
+                    'text_wrap': False,
+                    'border': 1,
+                },
+            },
         'Account Manager':
-            {'header_colour': '#383837',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                {
+                    'bold': True,
+                    'text_wrap': False,
+                    'valign': 'top',
+                    'fg_color': '#383837',
+                    'color': '#ffffff',
+                    'border': 1
+                },
+                'data_format':
+                {
+                    'text_wrap': False,
+                    'border': 1,
+                },
+            },
         'Vehicle Type':
-            {'header_colour': '#383837',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                {
+                    'bold': True,
+                    'text_wrap': False,
+                    'valign': 'top',
+                    'fg_color': '#383837',
+                    'color': '#ffffff',
+                    'border': 1
+                },
+                'data_format':
+                {
+                    'text_wrap': False,
+                    'border': 1,
+                },
+            },
         'Registration':
-            {'header_colour': '#383837',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#383837',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Hire End Date':
-            {'header_colour': '#383837',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                {
+                    'bold': True,
+                    'text_wrap': False,
+                    'valign': 'top',
+                    'fg_color': '#383837',
+                    'color': '#ffffff',
+                    'border': 1
+                },
+                'data_format':
+                {
+                    'text_wrap': False,
+                    'border': 1,
+                    'font_name': 'Times New Roman',
+                    'num_format': 'dd/mm/yyyy',
+
+                },
+            },
         'Customer Status':
-            {'header_colour': '#383837',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#383837',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'In Scope?':
-            {'header_colour': '#9fa3ab',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#9fa3ab',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+                'data_validation':
+                    {
+                        'validate': 'list',
+                        'source': ['Yes', 'No'],
+                    }
+            },
         'Engagement Level':
-            {'header_colour': '#9fa3ab',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#9fa3ab',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Current View':
-            {'header_colour': '#9fa3ab',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#9fa3ab',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Expected Return Date':
-            {'header_colour': '#9fa3ab',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#9fa3ab',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         '2nd Decision':
-            {'header_colour': '#e6d083',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#e6d083',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Plan View':
-            {'header_colour': '#9fa3ab',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#9fa3ab',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Product manager View':
-            {'header_colour': '#9fa3ab',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#9fa3ab',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Product Manager Return Date':
-            {'header_colour': '#9fa3ab',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#9fa3ab',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Mileage banding':
-            {'header_colour': '#7a7a7a',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#7a7a7a',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Up Priced':
-            {'header_colour': '#7a7a7a',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#7a7a7a',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Latest Increase':
-            {'header_colour': '#7a7a7a',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#7a7a7a',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Effective Date':
-            {'header_colour': '#7a7a7a',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#7a7a7a',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Customer Account Number':
-            {'header_colour': '#383837',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#383837',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Customer Name':
-            {'header_colour': '#383837',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#383837',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Segment':
-            {'header_colour': '#383837',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#383837',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Customer Powered Fleet':
-            {'header_colour': '#383837',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#383837',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Customer Trailer Fleet':
-            {'header_colour': '#383837',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#383837',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Customer Ancillary Fleet':
-            {'header_colour': '#383837',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#383837',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Customer Undefined Fleet':
-            {'header_colour': '#383837',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#383837',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Total Hexagon Fleet':
-            {'header_colour': '#383837',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#383837',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Power Type':
-            {'header_colour': '#93c78b',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#93c78b',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Vehicle On Fleet Date':
-            {'header_colour': '#93c78b',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#93c78b',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Years In Service':
-            {'header_colour': '#93c78b',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#93c78b',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Manufacturer':
-            {'header_colour': '#93c78b',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#93c78b',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Model':
-            {'header_colour': '#93c78b',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#93c78b',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Parent vehicle Type':
-            {'header_colour': '#93c78b',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#93c78b',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Fridge?':
-            {'header_colour': '#93c78b',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#93c78b',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Supplier name':
-            {'header_colour': '#e6ada5',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#e6ada5',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Supplier Post Code':
-            {'header_colour': '#e6ada5',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#e6ada5',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Current Mileage':
-            {'header_colour': '#f5b16e',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#f5b16e',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Mileage Reading Date':
-            {'header_colour': '#f5b16e',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#f5b16e',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Daily Mileage':
-            {'header_colour': '#f5b16e',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#f5b16e',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Project Mileage At Contract End':
-            {'header_colour': '#f5b16e',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#f5b16e',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Contract Annual Mileage Allowance':
-            {'header_colour': '#ff9833',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#ff9833',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Rated Mileage @ Reading Date':
-            {'header_colour': '#ff9833',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#ff9833',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Over/Under Rated Mileage @ Reading Date':
-            {'header_colour': '#ff9833',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#ff9833',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Over/Under Rated Mileage % @ Reading Date':
-            {'header_colour': '#ff9833',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#ff9833',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Financer':
-            {'header_colour': '#f74514',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#f74514',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Capital':
-            {'header_colour': '#f74514',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#f74514',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'NBV':
-            {'header_colour': '#f74514',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#f74514',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Residual':
-            {'header_colour': '#f74514',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#f74514',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Finance End Date':
-            {'header_colour': '#f74514',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#f74514',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Monthly Depreciation':
-            {'header_colour': '#f74514',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#f74514',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Hire Start Date':
-            {'header_colour': '#14b7f7',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#14b7f7',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Original Hire Start Date':
-            {'header_colour': '#14b7f7',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#14b7f7',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Contract Billing Amount(Monthly)':
-            {'header_colour': '#14b7f7',
-             'header_text_colour': '#000000'},
+        {
+            'header_format':
+                {
+                    'bold': True,
+                    'text_wrap': False,
+                    'valign': 'top',
+                    'fg_color': '#14b7f7',
+                    'color': '#000000',
+                    'border': 1
+                },
+            'data_format':
+                {
+                    'text_wrap': False,
+                    'border': 1,
+                },
+        },
         'Contract Billing Amount(Annually)':
-            {'header_colour': '#14b7f7',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#14b7f7',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Contract Billing Amount(Weekly)':
-            {'header_colour': '#14b7f7',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#14b7f7',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Billing Frequency':
-            {'header_colour': '#14b7f7',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#14b7f7',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Current Contract Expiry Month':
-            {'header_colour': '#077dab',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#077dab',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Current Contract Expiry Year':
-            {'header_colour': '#077dab',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#077dab',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Contract Status':
-            {'header_colour': '#077dab',
-             'header_text_colour': '#000000'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#077dab',
+                        'color': '#000000',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         '3 Month Revenue':
-            {'header_colour': '#074f6b',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                        'num_format': '£#,##0.00',
+                    },
+            },
         '3 Month Expenditure':
-            {'header_colour': '#074f6b',
-             'header_text_colour': '#ffffff'},
+        {
+            'header_format':
+                {
+                    'bold': True,
+                    'text_wrap': False,
+                    'valign': 'top',
+                    'fg_color': '#074f6b',
+                    'color': '#ffffff',
+                    'border': 1
+                },
+            'data_format':
+                {
+                    'text_wrap': False,
+                    'border': 1,
+                    'num_format': '£#,##0.00',
+                },
+        },
         '3 Month Margin':
-            {'header_colour': '#074f6b',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                        'num_format': '£#,##0.00',
+                    },
+            },
         '3 Month Margin %':
-            {'header_colour': '#074f6b',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         '12 Month Revenue':
-            {'header_colour': '#074f6b',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         '12 Month Expenditure':
-            {'header_colour': '#074f6b',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                        'num_format': '£#,##0.00',
+                    },
+            },
         '12 Month Margin':
-            {'header_colour': '#074f6b',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                        'num_format': '£#,##0.00',
+                    },
+            },
         '12 Month Margin %':
-            {'header_colour': '#074f6b',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Life Revenue':
-            {'header_colour': '#074f6b',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                        'num_format': '£#,##0.00',
+                    },
+            },
         'Life Expenditure':
-            {'header_colour': '#074f6b',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                        'num_format': '£#,##0.00',
+                    },
+            },
         'Life Margin':
-            {'header_colour': '#074f6b',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Life Margin %':
-            {'header_colour': '#074f6b',
-             'header_text_colour': '#ffffff'},
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                        'num_format': '0%',
+                    },
+            },
     }

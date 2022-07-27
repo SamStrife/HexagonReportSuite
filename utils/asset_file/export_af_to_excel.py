@@ -24,17 +24,11 @@ def export_af_to_excel():
 
     # Formats the sheet
     for col_num, header_value in enumerate(dataframe.columns.values):
-        header_format = workbook.add_format({
-            'bold': True,
-            'text_wrap': False,
-            'valign': 'top',
-            'fg_color': determine_format(header_value)['header_cell_colour'],
-            'color': determine_format(header_value)['header_text_colour'],
-            'border': 1})
-        data_format = workbook.add_format({
-            'text_wrap': False,
-            'border': 1})
+        header_format = workbook.add_format(get_header_format(header_value))
+        data_format = workbook.add_format(get_data_format(header_value))
         worksheet.write(0, col_num, header_value, header_format)
+        worksheet.set_column(col_num, col_num, 30, data_format)
+        worksheet.data_validation(1, col_num, max_row - 1, col_num, get_data_validation(header_value))
 
     # Add the filter to the sheet
     worksheet.autofilter(0, 0, max_row - 1, max_col - 1)
@@ -43,21 +37,25 @@ def export_af_to_excel():
     writer.save()
 
 
-def determine_format(header_name) -> {}:
-    """
-    Looks up the column name in cell format and returns the formatting details to be passed to XLSX Writer
-    :param header_name: The column name.
-    :return: {header_cell_colour: The cell colour for the column header, header_text_colour: The text colour for the
-    column header}
-    """
-    if header_name in cell_format.keys():
-        return {
-            'header_cell_colour': cell_format[header_name].get('header_colour', None),
-            'header_text_colour': cell_format[header_name].get('header_text_colour', None),
-            'data_text_colour':   cell_format[header_name].get('data_text_colour', None)
-        }
+def get_header_format(header):
+    if header in cell_format.keys():
+        return cell_format[header]['header_format']
     else:
-        return {
-            'header_cell_colour': '#000000',
-            'header_text_colour': '#000000'
-        }
+        return None
+
+
+def get_data_format(header):
+    if header in cell_format.keys():
+        return cell_format[header]['data_format']
+    else:
+        pass
+
+
+def get_data_validation(header):
+    if header in cell_format.keys():
+        try:
+            return cell_format[header]['data_validation']
+        except:
+            pass
+    else:
+        pass

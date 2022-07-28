@@ -9,7 +9,7 @@ cell_format = \
                     'valign': 'top',
                     'fg_color': '#383837',
                     'color': '#ffffff',
-                    'border': 1
+                    'border': 1,
                 },
                 'data_format':
                 {
@@ -26,7 +26,7 @@ cell_format = \
                     'valign': 'top',
                     'fg_color': '#383837',
                     'color': '#ffffff',
-                    'border': 1
+                    'border': 1,
                 },
                 'data_format':
                 {
@@ -43,7 +43,7 @@ cell_format = \
                     'valign': 'top',
                     'fg_color': '#383837',
                     'color': '#ffffff',
-                    'border': 1
+                    'border': 1,
                 },
                 'data_format':
                 {
@@ -60,7 +60,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#383837',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -77,14 +77,13 @@ cell_format = \
                     'valign': 'top',
                     'fg_color': '#383837',
                     'color': '#ffffff',
-                    'border': 1
+                    'border': 1,
                 },
                 'data_format':
                 {
                     'text_wrap': False,
                     'border': 1,
-                    'font_name': 'Times New Roman',
-                    'num_format': 'dd/mm/yyyy',
+                    'num_format': 'dd/mm/yyyy;[Red]dd/mm/yyyy',
 
                 },
             },
@@ -97,7 +96,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#383837',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -114,7 +113,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#9fa3ab',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -136,7 +135,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#9fa3ab',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -153,7 +152,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#9fa3ab',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -170,12 +169,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#9fa3ab',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': 'dd/mm/yyyy',
                     },
             },
         '2nd Decision':
@@ -187,7 +187,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#e6d083',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -204,7 +204,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#9fa3ab',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -221,7 +221,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#9fa3ab',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -238,12 +238,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#9fa3ab',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': 'dd/mm/yyyy',
                     },
             },
         'Mileage banding':
@@ -255,7 +256,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#7a7a7a',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -272,7 +273,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#7a7a7a',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -289,7 +290,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#7a7a7a',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -306,12 +307,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#7a7a7a',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': 'dd/mm/yyyy',
                     },
             },
         'Customer Account Number':
@@ -323,7 +325,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#383837',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -340,7 +342,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#383837',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -357,7 +359,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#383837',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -374,7 +376,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#383837',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -391,7 +393,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#383837',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -408,7 +410,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#383837',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -425,7 +427,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#383837',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -442,7 +444,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#383837',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -459,7 +461,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#93c78b',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -476,12 +478,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#93c78b',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': 'dd/mm/yyyy',
                     },
             },
         'Years In Service':
@@ -493,7 +496,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#93c78b',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -510,7 +513,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#93c78b',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -527,7 +530,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#93c78b',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -544,7 +547,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#93c78b',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -561,7 +564,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#93c78b',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -578,7 +581,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#e6ada5',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -595,7 +598,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#e6ada5',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -612,12 +615,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#f5b16e',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': '#,##0',
                     },
             },
         'Mileage Reading Date':
@@ -629,12 +633,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#f5b16e',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': 'dd/mm/yyyy',
                     },
             },
         'Daily Mileage':
@@ -646,12 +651,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#f5b16e',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': '#,##0',
                     },
             },
         'Project Mileage At Contract End':
@@ -663,12 +669,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#f5b16e',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': '#,##0',
                     },
             },
         'Contract Annual Mileage Allowance':
@@ -680,12 +687,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#ff9833',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': '#,##0',
                     },
             },
         'Rated Mileage @ Reading Date':
@@ -697,12 +705,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#ff9833',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': '#,##0',
                     },
             },
         'Over/Under Rated Mileage @ Reading Date':
@@ -714,12 +723,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#ff9833',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': '#,##0',
                     },
             },
         'Over/Under Rated Mileage % @ Reading Date':
@@ -731,12 +741,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#ff9833',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': '#,##0',
                     },
             },
         'Financer':
@@ -748,7 +759,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#f74514',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -765,7 +776,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#f74514',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -782,7 +793,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#f74514',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -799,7 +810,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#f74514',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -816,12 +827,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#f74514',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': 'dd/mm/yyyy',
                     },
             },
         'Monthly Depreciation':
@@ -833,7 +845,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#f74514',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -850,12 +862,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#14b7f7',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': 'dd/mm/yyyy',
                     },
             },
         'Original Hire Start Date':
@@ -867,12 +880,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#14b7f7',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': 'dd/mm/yyyy',
                     },
             },
         'Contract Billing Amount(Monthly)':
@@ -884,12 +898,13 @@ cell_format = \
                     'valign': 'top',
                     'fg_color': '#14b7f7',
                     'color': '#000000',
-                    'border': 1
+                    'border': 1,
                 },
             'data_format':
                 {
                     'text_wrap': False,
                     'border': 1,
+                    'num_format': '£#,##0.00;[Red](£#,##0.00)',
                 },
         },
         'Contract Billing Amount(Annually)':
@@ -901,12 +916,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#14b7f7',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': '£#,##0.00;[Red](£#,##0.00)',
                     },
             },
         'Contract Billing Amount(Weekly)':
@@ -918,12 +934,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#14b7f7',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': '£#,##0.00;[Red](£#,##0.00)',
                     },
             },
         'Billing Frequency':
@@ -935,7 +952,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#14b7f7',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -952,7 +969,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#077dab',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -969,7 +986,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#077dab',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -986,7 +1003,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#077dab',
                         'color': '#000000',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -1003,7 +1020,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#074f6b',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -1021,7 +1038,7 @@ cell_format = \
                     'valign': 'top',
                     'fg_color': '#074f6b',
                     'color': '#ffffff',
-                    'border': 1
+                    'border': 1,
                 },
             'data_format':
                 {
@@ -1039,13 +1056,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#074f6b',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
-                        'num_format': '£#,##0.00',
+                        'num_format': '£#,##0.00;[Red](£#,##0.00)',
                     },
             },
         '3 Month Margin %':
@@ -1057,12 +1074,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#074f6b',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': '0%;[Red]0%',
                     },
             },
         '12 Month Revenue':
@@ -1074,12 +1092,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#074f6b',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': '£#,##0.00',
                     },
             },
         '12 Month Expenditure':
@@ -1091,7 +1110,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#074f6b',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -1109,13 +1128,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#074f6b',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
-                        'num_format': '£#,##0.00',
+                        'num_format': '£#,##0.00;[Red](£#,##0.00)',
                     },
             },
         '12 Month Margin %':
@@ -1127,12 +1146,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#074f6b',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': '0%;[Red]0%',
                     },
             },
         'Life Revenue':
@@ -1144,7 +1164,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#074f6b',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -1162,7 +1182,7 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#074f6b',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
@@ -1180,12 +1200,13 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#074f6b',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
+                        'num_format': '£#,##0.00;[Red](£#,##0.00)',
                     },
             },
         'Life Margin %':
@@ -1197,13 +1218,81 @@ cell_format = \
                         'valign': 'top',
                         'fg_color': '#074f6b',
                         'color': '#ffffff',
-                        'border': 1
+                        'border': 1,
                     },
                 'data_format':
                     {
                         'text_wrap': False,
                         'border': 1,
-                        'num_format': '0%',
+                        'num_format': '0%;[Red]-0%',
+                    },
+            },
+        'Vehicle Status':
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#93c78b',
+                        'color': '#000000',
+                        'border': 1,
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
+        'Registration 2':
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#93c78b',
+                        'color': '#000000',
+                        'border': 1,
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
+        'Vehicle Type 2':
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#93c78b',
+                        'color': '#000000',
+                        'border': 1,
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
+        'Hire End Date 2':
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#14b7f7',
+                        'color': '#000000',
+                        'border': 1,
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
                     },
             },
     }

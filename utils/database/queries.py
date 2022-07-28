@@ -30,6 +30,7 @@ af_vehicle_and_hire_and_customer_query = \
     .on(af_vehicles['Customer Unique ID'] == af_customers['Unique ID'])\
     .select(
         af_vehicles['Unique ID'].as_('vehicle_id'),
+        af_vehicles['Vehicle Status Name'].as_('vehicle_status'),
         af_vehicles['Customer Name'].as_('customer_name'),
         af_vehicles['Relationship Manager'].as_('relationship_manager'),
         af_vehicles['Vehicle Type Name'].as_('vehicle_type'),

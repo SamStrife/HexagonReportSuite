@@ -26,6 +26,9 @@ def asset_file_generation(tidy_names=False):
         how="left",
         left_on="last_finance_unique_id",
         right_on="finance_id")
+    df['registration_2'] = df['registration']
+    df['vehicle_type_2'] = df['vehicle_type']
+    df['hire_expiry_date_2'] = df['hire_expiry_date'].dt.strftime('%d/%m/%Y')
     df['Current_Contract_Expiry_Month'] = df.apply(lambda x: x['hire_expiry_date'].month, axis=1)
     df['Current_Contract_Expiry_Year'] = df.apply(lambda x: x['hire_expiry_date'].year, axis=1)
     df['Contract_Billing_Amount_Monthly'] = df.apply(contract_billing_amount_monthly, axis=1)
@@ -79,6 +82,12 @@ def asset_file_generation(tidy_names=False):
     df['fridge'] = None
     df['capital'] = None
     df['contract_status'] = None
+    df['hire_expiry_date'] = df['hire_expiry_date'].dt.strftime('%d/%m/%Y')
+    df['vehicle_on_fleet_date'] = df['vehicle_on_fleet_date'].dt.strftime('%d/%m/%Y')
+    df['mileage_date'] = df['mileage_date'].dt.strftime('%d/%m/%Y')
+    df['hire_start_date'] = df['hire_start_date'].dt.strftime('%d/%m/%Y')
+    df['original_hire_date'] = df['original_hire_date'].dt.strftime('%d/%m/%Y')
+    df['finance_end_date'] = df['finance_end_date'].dt.strftime('%d/%m/%Y')
 
     # Tidying DataFrame
     df = df[['customer_group', 'relationship_manager', 'vehicle_type', 'registration', 'hire_expiry_date',
@@ -87,14 +96,14 @@ def asset_file_generation(tidy_names=False):
                      'product_manager_return_date', 'mileage_banding', 'up_priced', 'latest_increase', 'effective_date',
                      'customer_acc_number', 'customer_name', 'customer_group', 'segment', 'customer_powered_fleet',
                      'customer_trailer_fleet', 'customer_ancillary_fleet', 'customer_undefined_fleet',
-                     'total_customer_fleet', 'registration', 'power_type', 'vehicle_on_fleet_date', 'years_in_service',
-                     'manufacturer', 'model', 'vehicle_type', 'parent_type', 'fridge', 'supplier_name',
-                     'supplier_post_code', 'mileage', 'mileage_date', 'daily_mileage', 'projected_end_mileage',
-                     'contract_annual_mileage', 'rated_mileage_at_reading_date', 'over_under_rated_mileage_number',
-                     'over_under_rated_mileage_percentage', 'financer', 'capital', 'net_book_value', 'residual_value',
-                     'finance_end_date', 'monthly_depreciation', 'hire_start_date', 'original_hire_date',
-                     'Contract_Billing_Amount_Monthly', 'Contract_Billing_Amount_Annually',
-                     'Contract_Billing_Amount_Weekly', 'billing_frequency', 'hire_expiry_date',
+                     'total_customer_fleet', 'registration_2', 'vehicle_status', 'power_type', 'vehicle_on_fleet_date',
+                     'years_in_service', 'manufacturer', 'model', 'vehicle_type_2', 'parent_type', 'fridge',
+                     'supplier_name', 'supplier_post_code', 'mileage', 'mileage_date', 'daily_mileage',
+                     'projected_end_mileage', 'contract_annual_mileage', 'rated_mileage_at_reading_date',
+                     'over_under_rated_mileage_number', 'over_under_rated_mileage_percentage', 'financer', 'capital',
+                     'net_book_value', 'residual_value', 'finance_end_date', 'monthly_depreciation', 'hire_start_date',
+                     'original_hire_date', 'Contract_Billing_Amount_Monthly', 'Contract_Billing_Amount_Annually',
+                     'Contract_Billing_Amount_Weekly', 'billing_frequency', 'hire_expiry_date_2',
                      'Current_Contract_Expiry_Month', 'Current_Contract_Expiry_Year', 'contract_status',
                      '3_month_revenue', '3_month_spend', '3_month_margin', '3_month_margin_%', '12_month_revenue',
                      '12_month_spend', '12_month_margin', '12_month_margin_%', 'life_revenue', 'life_spend',
@@ -102,6 +111,7 @@ def asset_file_generation(tidy_names=False):
 
     rename_dictionary = \
     {
+        'vehicle_status': 'Vehicle Status',
         'customer_group': 'Customer Group',
         'relationship_manager': 'Account Manager',
         'vehicle_type': 'Vehicle Type',
@@ -173,6 +183,9 @@ def asset_file_generation(tidy_names=False):
         'life_spend': 'Life Expenditure',
         'life_margin': 'Life Margin',
         'life_margin_%': 'Life Margin %',
+        'registration_2': 'Registration 2',
+        'vehicle_type_2': 'Vehicle Type 2',
+        'hire_expiry_date_2': 'Hire End Date 2',
     }
 
     # Check to see if the columns need renaming or not
@@ -338,16 +351,16 @@ def lookup_revenue_split(vehicle, lookup_table, month):
         return None
 
 
-def three_month_margin_percent(vehicle) -> int | None:
+def three_month_margin_percent(vehicle) -> float | None:
     try:
-        return int((vehicle['3_month_revenue'] - vehicle['3_month_spend']) / vehicle['3_month_revenue'] * 100)
+        return (vehicle['3_month_revenue'] - vehicle['3_month_spend']) / vehicle['3_month_revenue']
     except:
         return None
 
 
-def twelve_month_margin_percent(vehicle) -> int | None:
+def twelve_month_margin_percent(vehicle) -> float | None:
     try:
-        return int((vehicle['12_month_revenue'] - vehicle['12_month_spend']) / vehicle['12_month_revenue'] * 100)
+        return (vehicle['12_month_revenue'] - vehicle['12_month_spend']) / vehicle['12_month_revenue']
     except:
         return None
 

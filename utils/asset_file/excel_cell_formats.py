@@ -142,6 +142,12 @@ cell_format = \
                         'text_wrap': False,
                         'border': 1,
                     },
+                'data_validation':
+                    {
+                        'validate': 'list',
+                        'source': ['Not Yet Engaged', 'Engaged', 'Not Yet Engaged - Lost', 'Engagement Complete',
+                                   'Proposal Submitted', 'With Pricing'],
+                    }
             },
         'Current View':
             {
@@ -159,6 +165,11 @@ cell_format = \
                         'text_wrap': False,
                         'border': 1,
                     },
+                'data_validation':
+                    {
+                        'validate': 'list',
+                        'source': ['These are to be determined'],
+                    }
             },
         'Expected Return Date':
             {
@@ -194,6 +205,11 @@ cell_format = \
                         'text_wrap': False,
                         'border': 1,
                     },
+                'data_validation':
+                    {
+                        'validate': 'list',
+                        'source': ['Keep On Fleet', 'Dispose'],
+                    }
             },
         'Plan View':
             {
@@ -228,6 +244,11 @@ cell_format = \
                         'text_wrap': False,
                         'border': 1,
                     },
+                'data_validation':
+                    {
+                        'validate': 'list',
+                        'source': ['To Be Determined'],
+                    }
             },
         'Product Manager Return Date':
             {

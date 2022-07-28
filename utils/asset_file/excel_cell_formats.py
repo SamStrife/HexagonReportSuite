@@ -1101,7 +1101,7 @@ cell_format = \
                     {
                         'text_wrap': False,
                         'border': 1,
-                        'num_format': '0%;[Red]0%',
+                        'num_format': '0%;[Red]-0%',
                     },
             },
         '12 Month Revenue':
@@ -1173,7 +1173,7 @@ cell_format = \
                     {
                         'text_wrap': False,
                         'border': 1,
-                        'num_format': '0%;[Red]0%',
+                        'num_format': '0%;[Red]-0%',
                     },
             },
         'Life Revenue':

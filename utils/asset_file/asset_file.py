@@ -310,8 +310,8 @@ def over_under_mileage_percent(vehicle):
 def total_hexagon_fleet(table):
     customers_and_vehicles = {}
     for row in table.iterrows():
-        customer_id = row[1][19]
-        power_type = row[1][51]
+        customer_id = row[1].loc['customer_ID']
+        power_type = row[1].loc['power_type']
         if customer_id in customers_and_vehicles.keys():
             if power_type in customers_and_vehicles[customer_id].keys():
                 customers_and_vehicles[customer_id][power_type] += 1

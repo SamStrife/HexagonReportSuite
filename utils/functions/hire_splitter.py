@@ -13,6 +13,23 @@ def report_for_hire_splitter():
     return split
 
 
+def calculate_individual_vehicle_rental_revenues(vehicle_id):
+    all_hires = str(queries.hires_for_splitter_report())
+    hires = pd.read_sql(all_hires, cnxn)
+    hires['days_on_rent'] = hires.apply(calculate_days_on_rent, axis=1)
+    hires['daily_rate'] = hires.apply(calculate_daily_rate, axis=1)
+
+    vehicle_revenue = []
+    for row in hires.iterrows():
+        vehicle_id_number = row[1].loc['vehicle_ID']
+        daily_rate = row[1].loc['daily_rate']
+        days_on_rent = row[1].loc['days_on_rent']
+        agreement_number = row[1].loc['agreement_number']
+        if vehicle_id == vehicle_id_number:
+            vehicle_revenue.append({agreement_number: daily_rate * days_on_rent})
+    return vehicle_revenue
+
+
 def calculate_days_on_rent(hire) -> int:
     start_date = hire['hire_start']
     end_date = hire['hire_end']
@@ -63,6 +80,7 @@ def calculate_revenue_split(table) -> {}:
             else:
                 pass
     return vehicle_revenue
+
 
 
 

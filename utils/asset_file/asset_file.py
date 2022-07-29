@@ -63,17 +63,17 @@ def asset_file_generation(tidy_names=False):
     df['12_month_margin_%'] = df.apply(twelve_month_margin_percent, axis=1)
     df['life_margin'] = df.apply(lambda x: x['life_revenue'] - x['life_spend'], axis=1)
     df['life_margin_%'] = df.apply(life_margin_percent, axis=1)
-    df['customer_status'] = None
-    df['in_scope'] = None
+    df['customer_status'] = df['account_status']
+    df['in_scope'] = df.apply(calculate_in_scope, axis=1)
     df['engagement_level'] = None
     df['current_view'] = None
-    df['expected_return_date'] = None
+    df['expected_return_date'] = df['hire_expiry_date'].dt.strftime('%d/%m/%Y')
     df['second_decision'] = None
-    df['expected_return_date_2'] = None
+    df['expected_return_date_2'] = df['hire_expiry_date'].dt.strftime('%d/%m/%Y')
     df['plan_view'] = None
     df['product_manager_view'] = None
     df['product_manager_return_date'] = None
-    df['mileage_banding'] = None
+    df['mileage_banding'] = df.apply(calculate_mileage_banding, axis=1)
     df['up_priced'] = None
     df['latest_increase'] = None
     df['effective_date'] = None
@@ -81,7 +81,7 @@ def asset_file_generation(tidy_names=False):
     df['years_in_service'] = df.apply(years_in_service, axis=1)
     df['fridge'] = None
     df['capital'] = None
-    df['contract_status'] = None
+    df['contract_status'] = df.apply(calculate_contract_status, axis=1)
     df['hire_expiry_date'] = df['hire_expiry_date'].dt.strftime('%d/%m/%Y')
     df['vehicle_on_fleet_date'] = df['vehicle_on_fleet_date'].dt.strftime('%d/%m/%Y')
     df['mileage_date'] = df['mileage_date'].dt.strftime('%d/%m/%Y')
@@ -370,3 +370,53 @@ def life_margin_percent(vehicle) -> float | None:
         return (vehicle['life_revenue'] - vehicle['life_spend']) / vehicle['life_revenue']
     except:
         return None
+
+
+def calculate_contract_status(vehicle):
+    match vehicle['hire_type_name']:
+        case 'Admin':
+            return 'Admin Vehicle'
+        case 'Captive Sub' | 'Replacement':
+            return 'Replacement'
+        case 'Contract' | 'Contract Hire':
+            return 'Contract Hire'
+        case 'Cross Hire':
+            return 'Cross Hire'
+        case 'Customer own Vehicle':
+            return 'Customer Own Vehicle'
+        case 'Fleet Management':
+            return 'Fleet Management'
+        case 'PAYG':
+            return 'PAYG'
+        case 'Peak':
+            return 'Peak'
+        case 'Spot Hire':
+            return 'Spot Hire'
+        case None:
+            return 'Not On Hire'
+        case _:
+            return "Undefined Hire Type"
+
+
+def calculate_in_scope(vehicle):
+    try:
+        months_until_end = (((vehicle['hire_expiry_date'] - datetime.today()).days / 365) * 12) + 1
+        if months_until_end <= 18:
+            return 'Yes'
+        else:
+            pass
+    except:
+        pass
+
+
+def calculate_mileage_banding(vehicle):
+    over_under_mileage = vehicle['over_under_rated_mileage_number']
+    if over_under_mileage <= 0:
+        return 'Green'
+    elif over_under_mileage > 0 and over_under_mileage < 50000:
+        return 'Amber'
+    elif over_under_mileage >= 50000:
+        return 'Red'
+    else:
+        return None
+

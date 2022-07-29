@@ -247,11 +247,6 @@ cell_format = \
                         'text_wrap': False,
                         'border': 1,
                     },
-                'data_validation':
-                    {
-                        'validate': 'list',
-                        'source': ['To Be Determined'],
-                    }
             },
         'Product Manager Return Date':
             {

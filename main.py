@@ -1,7 +1,5 @@
-from utils.functions.hire_splitter import calculate_individual_vehicle_rental_revenues
+from utils.asset_file.export_af_to_excel import export_af_to_excel
 
-# export_af_to_excel()
+export_af_to_excel()
 
-
-print(calculate_individual_vehicle_rental_revenues(4814))
 

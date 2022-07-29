@@ -46,10 +46,10 @@ def asset_file_generation(tidy_names=False):
 
     customer_fleet_numbers = total_hexagon_fleet(df)
 
-    df['customer_powered_fleet'] = df.apply(count_fleet, args=(customer_fleet_numbers, "Power Fleet"), axis=1)
-    df['customer_trailer_fleet'] = df.apply(count_fleet, args=(customer_fleet_numbers, "Trailer Fleet"), axis=1)
-    df['customer_ancillary_fleet'] = df.apply(count_fleet, args=(customer_fleet_numbers, "Ancillary Unit"), axis=1)
-    df['customer_undefined_fleet'] = df.apply(count_fleet, args=(customer_fleet_numbers, "Undefined"), axis=1)
+    df['hexagon_powered_fleet'] = df.apply(count_fleet, args=(customer_fleet_numbers, "Power Fleet"), axis=1)
+    df['hexagon_trailer_fleet'] = df.apply(count_fleet, args=(customer_fleet_numbers, "Trailer Fleet"), axis=1)
+    df['hexagon_ancillary_fleet'] = df.apply(count_fleet, args=(customer_fleet_numbers, "Ancillary Unit"), axis=1)
+    df['hexagon_undefined_fleet'] = df.apply(count_fleet, args=(customer_fleet_numbers, "Undefined"), axis=1)
     df['total_customer_fleet'] = df.apply(total_customer_fleet, args=(customer_fleet_numbers,), axis=1)
     df['3_month_spend'] = df.apply(lookup_spend_split,args=(spend_split, '3'), axis=1)
     df['12_month_spend'] = df.apply(lookup_spend_split, args=(spend_split, '12'), axis=1)
@@ -91,23 +91,23 @@ def asset_file_generation(tidy_names=False):
 
     # Tidying DataFrame
     df = df[['customer_group', 'relationship_manager', 'vehicle_type', 'registration', 'hire_expiry_date',
-                     'customer_status', 'in_scope', 'engagement_level', 'current_view', 'expected_return_date',
-                     'second_decision', 'expected_return_date_2', 'plan_view', 'product_manager_view',
-                     'product_manager_return_date', 'mileage_banding', 'up_priced', 'latest_increase', 'effective_date',
-                     'customer_acc_number', 'customer_name', 'customer_group', 'segment', 'customer_powered_fleet',
-                     'customer_trailer_fleet', 'customer_ancillary_fleet', 'customer_undefined_fleet',
-                     'total_customer_fleet', 'registration_2', 'vehicle_status', 'power_type', 'vehicle_on_fleet_date',
-                     'years_in_service', 'manufacturer', 'model', 'vehicle_type_2', 'parent_type', 'fridge',
-                     'supplier_name', 'supplier_post_code', 'mileage', 'mileage_date', 'daily_mileage',
-                     'projected_end_mileage', 'contract_annual_mileage', 'rated_mileage_at_reading_date',
-                     'over_under_rated_mileage_number', 'over_under_rated_mileage_percentage', 'financer', 'capital',
-                     'net_book_value', 'residual_value', 'finance_end_date', 'monthly_depreciation', 'hire_start_date',
-                     'original_hire_date', 'Contract_Billing_Amount_Monthly', 'Contract_Billing_Amount_Annually',
-                     'Contract_Billing_Amount_Weekly', 'billing_frequency', 'hire_expiry_date_2',
-                     'Current_Contract_Expiry_Month', 'Current_Contract_Expiry_Year', 'contract_status',
-                     '3_month_revenue', '3_month_spend', '3_month_margin', '3_month_margin_%', '12_month_revenue',
-                     '12_month_spend', '12_month_margin', '12_month_margin_%', 'life_revenue', 'life_spend',
-                     'life_margin', 'life_margin_%']]
+             'customer_status', 'in_scope', 'engagement_level', 'current_view', 'expected_return_date',
+             'second_decision', 'expected_return_date_2', 'plan_view', 'product_manager_view',
+             'product_manager_return_date', 'mileage_banding', 'up_priced', 'latest_increase', 'effective_date',
+             'customer_acc_number', 'customer_name', 'customer_group', 'segment', 'hexagon_powered_fleet',
+             'hexagon_trailer_fleet', 'hexagon_ancillary_fleet', 'hexagon_undefined_fleet',
+             'total_customer_fleet', 'registration_2', 'vehicle_status', 'power_type', 'vehicle_on_fleet_date',
+             'years_in_service', 'manufacturer', 'model', 'vehicle_type_2', 'parent_type', 'fridge',
+             'supplier_name', 'supplier_post_code', 'mileage', 'mileage_date', 'daily_mileage',
+             'projected_end_mileage', 'contract_annual_mileage', 'rated_mileage_at_reading_date',
+             'over_under_rated_mileage_number', 'over_under_rated_mileage_percentage', 'financer', 'capital',
+             'net_book_value', 'residual_value', 'finance_end_date', 'monthly_depreciation', 'hire_start_date',
+             'original_hire_date', 'Contract_Billing_Amount_Monthly', 'Contract_Billing_Amount_Annually',
+             'Contract_Billing_Amount_Weekly', 'billing_frequency', 'hire_expiry_date_2',
+             'Current_Contract_Expiry_Month', 'Current_Contract_Expiry_Year', 'contract_status',
+             '3_month_revenue', '3_month_spend', '3_month_margin', '3_month_margin_%', '12_month_revenue',
+             '12_month_spend', '12_month_margin', '12_month_margin_%', 'life_revenue', 'life_spend',
+             'life_margin', 'life_margin_%']]
 
     rename_dictionary = \
     {
@@ -134,10 +134,10 @@ def asset_file_generation(tidy_names=False):
         'customer_acc_number': 'Customer Account Number',
         'customer_name': 'Customer Name',
         'segment': 'Segment',
-        'customer_powered_fleet': 'Customer Powered Fleet',
-        'customer_trailer_fleet': 'Customer Trailer Fleet',
-        'customer_ancillary_fleet': 'Customer Ancillary Fleet',
-        'customer_undefined_fleet': 'Customer Undefined Fleet',
+        'hexagon_powered_fleet': 'Hexagon Powered Fleet',
+        'hexagon_trailer_fleet': 'Hexagon Trailer Fleet',
+        'hexagon_ancillary_fleet': 'Hexagon Ancillary Fleet',
+        'hexagon_undefined_fleet': 'Hexagon Undefined Fleet',
         'total_customer_fleet': 'Total Hexagon Fleet',
         'power_type': 'Power Type',
         'vehicle_on_fleet_date': 'Vehicle On Fleet Date',
@@ -310,29 +310,29 @@ def over_under_mileage_percent(vehicle):
 def total_hexagon_fleet(table):
     customers_and_vehicles = {}
     for row in table.iterrows():
-        customer_id = row[1].loc['customer_ID']
+        customer_group = row[1].loc['customer_group']
         power_type = row[1].loc['power_type']
-        if customer_id in customers_and_vehicles.keys():
-            if power_type in customers_and_vehicles[customer_id].keys():
-                customers_and_vehicles[customer_id][power_type] += 1
+        if customer_group in customers_and_vehicles.keys():
+            if power_type in customers_and_vehicles[customer_group].keys():
+                customers_and_vehicles[customer_group][power_type] += 1
             else:
-                customers_and_vehicles[customer_id][power_type] = 1
+                customers_and_vehicles[customer_group][power_type] = 1
         else:
-            customers_and_vehicles[customer_id] = {}
-            customers_and_vehicles[customer_id][power_type] = 1
+            customers_and_vehicles[customer_group] = {}
+            customers_and_vehicles[customer_group][power_type] = 1
     return customers_and_vehicles
 
 
 def count_fleet(vehicle, lookup_table, power_type):
     try:
-        return lookup_table[vehicle['customer_ID']][power_type]
+        return lookup_table[vehicle['customer_group']][power_type]
     except:
         return None
 
 
 def total_customer_fleet(vehicle, lookup_table):
     try:
-        return sum(lookup_table[vehicle['customer_ID']].values(), 0)
+        return sum(lookup_table[vehicle['customer_group']].values(), 0)
     except:
         return None
 

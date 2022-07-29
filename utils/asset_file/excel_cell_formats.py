@@ -168,7 +168,10 @@ cell_format = \
                 'data_validation':
                     {
                         'validate': 'list',
-                        'source': ['These are to be determined'],
+                        'source': ['Captive Substitute', 'Extend', 'Extension Package Signed', 'Lost - Fleet Reduction',
+                                   'Lost - Hexagon decision', 'Lost - Other', 'Lost - Ownership', 'Lost - Price',
+                                   'Lost - Service', 'Rental Extension', 'Rental Extension signed', 'Replace',
+                                   'Replacement Package Signed'],
                     }
             },
         'Expected Return Date':
@@ -388,7 +391,7 @@ cell_format = \
                         'border': 1,
                     },
             },
-        'Customer Powered Fleet':
+        'Hexagon Powered Fleet':
             {
                 'header_format':
                     {
@@ -405,7 +408,7 @@ cell_format = \
                         'border': 1,
                     },
             },
-        'Customer Trailer Fleet':
+        'Hexagon Trailer Fleet':
             {
                 'header_format':
                     {
@@ -422,7 +425,7 @@ cell_format = \
                         'border': 1,
                     },
             },
-        'Customer Ancillary Fleet':
+        'Hexagon Ancillary Fleet':
             {
                 'header_format':
                     {
@@ -439,7 +442,7 @@ cell_format = \
                         'border': 1,
                     },
             },
-        'Customer Undefined Fleet':
+        'Hexagon Undefined Fleet':
             {
                 'header_format':
                     {

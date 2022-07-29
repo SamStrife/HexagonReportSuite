@@ -14,9 +14,9 @@ def asset_file_generation(tidy_names=False):
     vehicles_hires_customers = pd.read_sql(str(queries.af_vehicle_and_hire_and_customer_query), cnxn)
     addresses = pd.read_sql(str(queries.af_address_query), cnxn)
     finance = pd.read_sql(str(queries.af_finance_query), cnxn)
-    spend_split = all_fleet_split()
-    revenue_split = report_for_hire_splitter()
-    finance_split = report_for_agreement_splitter()
+    spend_split = all_fleet_split(vehicles_hires_customers)
+    revenue_split = report_for_hire_splitter(vehicles_hires_customers)
+    finance_split = report_for_agreement_splitter(vehicles_hires_customers)
 
     # DataFrame Creation
     df = vehicles_hires_customers.merge(
@@ -57,7 +57,7 @@ def asset_file_generation(tidy_names=False):
     df['3_month_spend'] = df.apply(lookup_spend_split,args=(spend_split, '3'), axis=1)
     df['12_month_spend'] = df.apply(lookup_spend_split, args=(spend_split, '12'), axis=1)
     df['life_spend'] = df.apply(lookup_spend_split, args=(spend_split, 'Life'), axis=1)
-    df['3_month_revenue'] = df.apply(lookup_revenue_split,args=(revenue_split,'3'), axis=1)
+    df['3_month_revenue'] = df.apply(lookup_revenue_split,args=(revenue_split, '3'), axis=1)
     df['12_month_revenue'] = df.apply(lookup_revenue_split, args=(revenue_split, '12'), axis=1)
     df['life_revenue'] = df.apply(lookup_revenue_split, args=(revenue_split, 'Life'), axis=1)
     df['3_month_finance'] = df.apply(lookup_finance_split,args=(finance_split,'3'), axis=1)

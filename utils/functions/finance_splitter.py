@@ -4,12 +4,12 @@ from utils.database.connection import cnxn
 from datetime import datetime
 
 
-def report_for_agreement_splitter():
+def report_for_agreement_splitter(dataframe):
     all_agreements = str(queries.finance_agreement_splitter_report())
     agreements = pd.read_sql(all_agreements, cnxn)
     agreements['days_open'] = agreements.apply(calculate_days_open, axis=1)
     agreements['daily_rate'] = agreements.apply(calculate_daily_rate, axis=1)
-    split = calculate_revenue_split(agreements)
+    split = calculate_revenue_split(dataframe, agreements)
     return split
 
 
@@ -45,8 +45,11 @@ def calculate_daily_rate(hire) -> float | None:
     return round(((hire['finance_monthly_payment'] * 12) / 52) / 5, 2)
 
 
-def calculate_revenue_split(table) -> {}:
+def calculate_revenue_split(dataframe, table) -> {}:
     vehicle_revenue = {}
+    for vehicle in dataframe.iterrows():
+        vehicle_id = vehicle[1].loc['vehicle_id']
+        vehicle_revenue[vehicle_id] = {'3': 0, '12': 0, 'Life': 0}
     for row in table.iterrows():
         vehicle_id = row[1].loc['vehicle_ID']
         live = row[1].loc['finance_live']

@@ -4,12 +4,12 @@ from utils.database.connection import cnxn
 from datetime import datetime
 
 
-def report_for_hire_splitter():
+def report_for_hire_splitter(dataframe):
     all_hires = str(queries.hires_for_splitter_report())
     hires = pd.read_sql(all_hires, cnxn)
     hires['days_on_rent'] = hires.apply(calculate_days_on_rent, axis=1)
     hires['daily_rate'] = hires.apply(calculate_daily_rate, axis=1)
-    split = calculate_revenue_split(hires)
+    split = calculate_revenue_split(dataframe, hires)
     return split
 
 
@@ -52,8 +52,11 @@ def calculate_daily_rate(hire) -> float | None:
         return None
 
 
-def calculate_revenue_split(table) -> {}:
+def calculate_revenue_split(dataframe, table) -> {}:
     vehicle_revenue = {}
+    for vehicle in dataframe.iterrows():
+        vehicle_id = vehicle[1].loc['vehicle_id']
+        vehicle_revenue[vehicle_id] = {'3': 0, '12': 0, 'Life': 0}
     for row in table.iterrows():
         vehicle_id = row[1].loc['vehicle_ID']
         live = row[1].loc['live']

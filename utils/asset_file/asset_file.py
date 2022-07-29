@@ -2,6 +2,8 @@ import pandas as pd
 from utils.database import queries
 from utils.database.connection import cnxn
 from datetime import datetime
+
+from utils.functions.finance_splitter import report_for_agreement_splitter
 from utils.functions.functions import determine_vehicle_power_type
 from utils.functions.vehicle_spend import all_fleet_split
 from utils.functions.hire_splitter import report_for_hire_splitter
@@ -14,6 +16,7 @@ def asset_file_generation(tidy_names=False):
     finance = pd.read_sql(str(queries.af_finance_query), cnxn)
     spend_split = all_fleet_split()
     revenue_split = report_for_hire_splitter()
+    finance_split = report_for_agreement_splitter()
 
     # DataFrame Creation
     df = vehicles_hires_customers.merge(
@@ -57,11 +60,14 @@ def asset_file_generation(tidy_names=False):
     df['3_month_revenue'] = df.apply(lookup_revenue_split,args=(revenue_split,'3'), axis=1)
     df['12_month_revenue'] = df.apply(lookup_revenue_split, args=(revenue_split, '12'), axis=1)
     df['life_revenue'] = df.apply(lookup_revenue_split, args=(revenue_split, 'Life'), axis=1)
-    df['3_month_margin'] = df.apply(lambda x: x['3_month_revenue'] - x['3_month_spend'], axis=1)
+    df['3_month_finance'] = df.apply(lookup_finance_split,args=(finance_split,'3'), axis=1)
+    df['12_month_finance'] = df.apply(lookup_finance_split, args=(finance_split, '12'), axis=1)
+    df['life_finance'] = df.apply(lookup_finance_split, args=(finance_split, 'Life'), axis=1)
+    df['3_month_margin'] = df.apply(lambda x: x['3_month_revenue'] - (x['3_month_spend'] + x['3_month_finance']), axis=1)
     df['3_month_margin_%'] = df.apply(three_month_margin_percent, axis=1)
-    df['12_month_margin'] = df.apply(lambda x: x['12_month_revenue'] - x['12_month_spend'], axis=1)
+    df['12_month_margin'] = df.apply(lambda x: x['12_month_revenue'] - (x['12_month_spend'] + x['12_month_finance']), axis=1)
     df['12_month_margin_%'] = df.apply(twelve_month_margin_percent, axis=1)
-    df['life_margin'] = df.apply(lambda x: x['life_revenue'] - x['life_spend'], axis=1)
+    df['life_margin'] = df.apply(lambda x: x['life_revenue'] - (x['life_spend'] + x['life_finance']), axis=1)
     df['life_margin_%'] = df.apply(life_margin_percent, axis=1)
     df['customer_status'] = df['account_status']
     df['in_scope'] = df.apply(calculate_in_scope, axis=1)
@@ -105,9 +111,9 @@ def asset_file_generation(tidy_names=False):
              'original_hire_date', 'Contract_Billing_Amount_Monthly', 'Contract_Billing_Amount_Annually',
              'Contract_Billing_Amount_Weekly', 'billing_frequency', 'hire_expiry_date_2',
              'Current_Contract_Expiry_Month', 'Current_Contract_Expiry_Year', 'contract_status',
-             '3_month_revenue', '3_month_spend', '3_month_margin', '3_month_margin_%', '12_month_revenue',
-             '12_month_spend', '12_month_margin', '12_month_margin_%', 'life_revenue', 'life_spend',
-             'life_margin', 'life_margin_%']]
+             '3_month_revenue', '3_month_spend', '3_month_finance', '3_month_margin', '3_month_margin_%',
+             '12_month_revenue', '12_month_spend', '12_month_finance', '12_month_margin', '12_month_margin_%',
+             'life_revenue', 'life_spend', 'life_finance', 'life_margin', 'life_margin_%']]
 
     rename_dictionary = \
     {
@@ -186,6 +192,9 @@ def asset_file_generation(tidy_names=False):
         'registration_2': 'Registration 2',
         'vehicle_type_2': 'Vehicle Type 2',
         'hire_expiry_date_2': 'Hire End Date 2',
+        '3_month_finance': '3 Month Finance',
+        '12_month_finance': '12 Month Finance',
+        'life_finance': 'Life Finance',
     }
 
     # Check to see if the columns need renaming or not
@@ -351,23 +360,30 @@ def lookup_revenue_split(vehicle, lookup_table, month):
         return None
 
 
+def lookup_finance_split(vehicle, lookup_table, month):
+    try:
+        return lookup_table[vehicle['vehicle_id']][month]
+    except:
+        return None
+
+
 def three_month_margin_percent(vehicle) -> float | None:
     try:
-        return (vehicle['3_month_revenue'] - vehicle['3_month_spend']) / vehicle['3_month_revenue']
+        return (vehicle['3_month_revenue'] - (vehicle['3_month_spend'] + vehicle['3_month_finance'])) / vehicle['3_month_revenue']
     except:
         return None
 
 
 def twelve_month_margin_percent(vehicle) -> float | None:
     try:
-        return (vehicle['12_month_revenue'] - vehicle['12_month_spend']) / vehicle['12_month_revenue']
+        return (vehicle['12_month_revenue'] - (vehicle['12_month_spend'] + vehicle['12_month_finance'])) / vehicle['12_month_revenue']
     except:
         return None
 
 
 def life_margin_percent(vehicle) -> float | None:
     try:
-        return (vehicle['life_revenue'] - vehicle['life_spend']) / vehicle['life_revenue']
+        return (vehicle['life_revenue'] - (vehicle['life_spend'] + vehicle['life_finance'])) / vehicle['life_revenue']
     except:
         return None
 

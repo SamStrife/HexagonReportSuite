@@ -231,7 +231,7 @@ cell_format = \
                         'border': 1,
                     },
             },
-        'Product manager View':
+        'Product Manager View':
             {
                 'header_format':
                     {
@@ -266,7 +266,7 @@ cell_format = \
                         'num_format': 'dd/mm/yyyy',
                     },
             },
-        'Mileage banding':
+        'Mileage Banding':
             {
                 'header_format':
                     {

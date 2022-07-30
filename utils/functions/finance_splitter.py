@@ -13,21 +13,20 @@ def report_for_agreement_splitter(dataframe):
     return split
 
 
-# def calculate_individual_agreement_costs(vehicle_id):
-#     all_agreements = str(queries.finance_agreement_splitter_report())
-#     hires = pd.read_sql(all_agreements, cnxn)
-#     hires['days_on_rent'] = hires.apply(calculate_days_open, axis=1)
-#     hires['daily_rate'] = hires.apply(calculate_daily_rate, axis=1)
-#
-#     vehicle_revenue = []
-#     for row in hires.iterrows():
-#         vehicle_id_number = row[1].loc['vehicle_ID']
-#         daily_rate = row[1].loc['daily_rate']
-#         days_on_rent = row[1].loc['days_on_rent']
-#         agreement_number = row[1].loc['agreement_number']
-#         if vehicle_id == vehicle_id_number:
-#             vehicle_revenue.append({agreement_number: daily_rate * days_on_rent})
-#     return vehicle_revenue
+def calculate_individual_agreement_costs(vehicle_id):
+    all_agreements = str(queries.finance_agreement_splitter_report())
+    agreements = pd.read_sql(all_agreements, cnxn)
+    agreements['days_on_rent'] = agreements.apply(calculate_days_open, axis=1)
+    agreements['daily_rate'] = agreements.apply(calculate_daily_rate, axis=1)
+    vehicle_revenue = []
+    for row in agreements.iterrows():
+        vehicle_id_number = row[1].loc['vehicle_ID']
+        daily_rate = row[1].loc['daily_rate']
+        days_on_rent = row[1].loc['days_on_rent']
+        agreement_number = row[1].loc['finance_id']
+        if vehicle_id == vehicle_id_number:
+            vehicle_revenue.append({agreement_number: daily_rate * days_on_rent, 'Days on rent: ': days_on_rent, 'Daily Rate: ': daily_rate})
+    return vehicle_revenue
 
 
 def calculate_days_open(agreement) -> int:

@@ -3,9 +3,9 @@ import pandas as pd
 from utils.asset_file.excel_cell_formats import cell_format
 
 
-def export_af_to_excel():
+def export_af_to_excel(account_manager=None):
     # Create the dataframe by running the asset file query (uses tidynames to format the cell headers in advance)
-    dataframe = afg(tidy_names=True)
+    dataframe = afg(tidy_names=True, account_manager=account_manager)
 
     # Get the shape of the dataframe
     (max_row, max_col) = dataframe.shape

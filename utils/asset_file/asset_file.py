@@ -9,7 +9,7 @@ from utils.functions.vehicle_spend import all_fleet_split
 from utils.functions.hire_splitter import report_for_hire_splitter
 
 
-def asset_file_generation(tidy_names=False):
+def asset_file_generation(tidy_names=False, account_manager=None):
     # Queries That Need To Be Referred To (Need to Make these Async For Performance)
     vehicles_hires_customers = pd.read_sql(str(queries.af_vehicle_and_hire_and_customer_query), cnxn)
     addresses = pd.read_sql(str(queries.af_address_query), cnxn)
@@ -29,6 +29,10 @@ def asset_file_generation(tidy_names=False):
         how="left",
         left_on="last_finance_unique_id",
         right_on="finance_id")
+
+    if account_manager:
+        df = df[df['relationship_manager'] == account_manager]
+
     df['registration_2'] = df['registration']
     df['vehicle_type_2'] = df['vehicle_type']
     df['hire_expiry_date_2'] = df['hire_expiry_date'].dt.strftime('%d/%m/%Y')
@@ -131,9 +135,9 @@ def asset_file_generation(tidy_names=False):
         'second_decision': '2nd Decision',
         'expected_return_date_2': 'Expected Return Date',
         'plan_view': 'Plan View',
-        'product_manager_view': 'Product manager View',
+        'product_manager_view': 'Product Manager View',
         'product_manager_return_date': 'Product Manager Return Date',
-        'mileage_banding': 'Mileage banding',
+        'mileage_banding': 'Mileage Banding',
         'up_priced': 'Up Priced',
         'latest_increase': 'Latest Increase',
         'effective_date': 'Effective Date',

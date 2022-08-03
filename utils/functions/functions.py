@@ -1,6 +1,14 @@
 import pandas as pd
-from utils.database import queries
+from utils.database import queries, column_selectors, databases
 from utils.database.connection import cnxn
+
+
+def get_vehicle_details(registration):
+    data = pd.read_sql(
+        f"Select {column_selectors.vehicle_details_for_hexreports}  "
+        f"from {databases.vehicles} "
+        f"where \"Vehicle Registration\" = '{registration}';", cnxn)
+    return data
 
 
 def supplier_spend(supplier=None, final_costs=False, styling=None):

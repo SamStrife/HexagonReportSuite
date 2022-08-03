@@ -17,7 +17,7 @@ supplier_spend_columns =\
     \"Cost\" as total_cost,\
     \"Recharge\" as recharge"
 
-vehicle_details = \
+vehicle_details_for_hexreports = \
     "\"Manufacturer Name\" as manufacturer,\
     \"Model Name\"  as model,\
     \"Vehicle Type Name\" as vehicleType,\

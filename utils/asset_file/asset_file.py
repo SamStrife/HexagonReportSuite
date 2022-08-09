@@ -34,8 +34,6 @@ def asset_file_generation(tidy_names=False, account_manager=None):
         file = ctx.web.get_file_by_server_relative_path(sharepoint_file_path).download(local_file).execute_query()
         master_frame = pd.read_excel(download_path, index_col='Registration')
 
-    print(master_frame.loc['YL68ADO']['Engagement Level'])
-
     # Queries That Need To Be Referred To (Need to Make these Async For Performance)
     vehicles_hires_customers = pd.read_sql(str(queries.af_vehicle_and_hire_and_customer_query), cnxn)
     addresses = pd.read_sql(str(queries.af_address_query), cnxn)
@@ -101,18 +99,18 @@ def asset_file_generation(tidy_names=False, account_manager=None):
     df['life_margin_%'] = df.apply(life_margin_percent, axis=1)
     df['customer_status'] = df['account_status']
     df['in_scope'] = df.apply(calculate_in_scope, axis=1)
-    df['engagement_level'] = df.apply(lookup_engagement_level_from_master, axis=1)
-    df['current_view'] = None
+    df['engagement_level'] = df.apply(lookup_from_master, args=('Engagement Level',), axis=1)
+    df['current_view'] = df.apply(lookup_from_master, args=('Current View',), axis=1)
     df['expected_return_date'] = df['hire_expiry_date'].dt.strftime('%d/%m/%Y')
-    df['second_decision'] = None
+    df['second_decision'] = df.apply(lookup_from_master, args=('2nd Decision',), axis=1)
     df['expected_return_date_2'] = df['hire_expiry_date'].dt.strftime('%d/%m/%Y')
-    df['plan_view'] = None
-    df['product_manager_view'] = None
-    df['product_manager_return_date'] = None
+    df['plan_view'] = df.apply(lookup_from_master, args=('Plan View',), axis=1)
+    df['product_manager_view'] = df.apply(lookup_from_master, args=('Product Manager View',), axis=1)
+    df['product_manager_return_date'] = df.apply(lookup_from_master, args=('Product Manager Return Date',), axis=1)
     df['mileage_banding'] = df.apply(calculate_mileage_banding, axis=1)
-    df['up_priced'] = None
-    df['latest_increase'] = None
-    df['effective_date'] = None
+    df['up_priced'] = df.apply(lookup_from_master, args=('Up Priced',), axis=1)
+    df['latest_increase'] = df.apply(lookup_from_master, args=('Latest Increase',), axis=1)
+    df['effective_date'] = df.apply(lookup_from_master, args=('Effective Date',), axis=1)
     df['segment'] = None
     df['years_in_service'] = df.apply(years_in_service, axis=1)
     df['fridge'] = None
@@ -468,10 +466,10 @@ def calculate_mileage_banding(vehicle):
         return None
 
 
-def lookup_engagement_level_from_master(vehicle):
+def lookup_from_master(vehicle, lookup):
     global master_frame
     try:
-        return master_frame.loc[vehicle.loc['registration']]['Engagement Level']
+        return master_frame.loc[vehicle.loc['registration']][lookup]
     except:
         pass
 

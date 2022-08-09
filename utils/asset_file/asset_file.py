@@ -1,7 +1,14 @@
+import tempfile
+
 import pandas as pd
 from utils.database import queries
 from utils.database.connection import cnxn
 from datetime import datetime
+from dotenv import load_dotenv
+import os
+
+from office365.runtime.auth.user_credential import UserCredential
+from office365.sharepoint.client_context import ClientContext
 
 from utils.functions.finance_splitter import report_for_agreement_splitter
 from utils.functions.functions import determine_vehicle_power_type
@@ -9,7 +16,26 @@ from utils.functions.vehicle_spend import all_fleet_split
 from utils.functions.hire_splitter import report_for_hire_splitter
 
 
+load_dotenv()
+sharepoint_site_url = os.getenv("SHAREPOINTASSETFILESITEURL")
+sharepoint_username = os.getenv("SHAREPOINTASSETFILEUSER")
+sharepoint_password = os.getenv("SHAREPOINTASSETFILEPASSWORD")
+sharepoint_file_path = os.getenv("SHAREPOINTASSETFILEFILEURL")
+
+master_frame = None
+
+
 def asset_file_generation(tidy_names=False, account_manager=None):
+    # Get Master File For Comparison Purposes
+    global master_frame
+    ctx = ClientContext(sharepoint_site_url).with_credentials(UserCredential(sharepoint_username,sharepoint_password))
+    download_path = os.path.join(tempfile.mkdtemp(), os.path.basename(sharepoint_file_path))
+    with open(download_path, 'wb') as local_file:
+        file = ctx.web.get_file_by_server_relative_path(sharepoint_file_path).download(local_file).execute_query()
+        master_frame = pd.read_excel(download_path, index_col='Registration')
+
+    print(master_frame.loc['YL68ADO']['Engagement Level'])
+
     # Queries That Need To Be Referred To (Need to Make these Async For Performance)
     vehicles_hires_customers = pd.read_sql(str(queries.af_vehicle_and_hire_and_customer_query), cnxn)
     addresses = pd.read_sql(str(queries.af_address_query), cnxn)
@@ -64,7 +90,7 @@ def asset_file_generation(tidy_names=False, account_manager=None):
     df['3_month_revenue'] = df.apply(lookup_revenue_split,args=(revenue_split, '3'), axis=1)
     df['12_month_revenue'] = df.apply(lookup_revenue_split, args=(revenue_split, '12'), axis=1)
     df['life_revenue'] = df.apply(lookup_revenue_split, args=(revenue_split, 'Life'), axis=1)
-    df['3_month_finance'] = df.apply(lookup_finance_split,args=(finance_split,'3'), axis=1)
+    df['3_month_finance'] = df.apply(lookup_finance_split, args=(finance_split,'3'), axis=1)
     df['12_month_finance'] = df.apply(lookup_finance_split, args=(finance_split, '12'), axis=1)
     df['life_finance'] = df.apply(lookup_finance_split, args=(finance_split, 'Life'), axis=1)
     df['3_month_margin'] = df.apply(lambda x: x['3_month_revenue'] - (x['3_month_spend'] + x['3_month_finance']), axis=1)
@@ -75,7 +101,7 @@ def asset_file_generation(tidy_names=False, account_manager=None):
     df['life_margin_%'] = df.apply(life_margin_percent, axis=1)
     df['customer_status'] = df['account_status']
     df['in_scope'] = df.apply(calculate_in_scope, axis=1)
-    df['engagement_level'] = None
+    df['engagement_level'] = df.apply(lookup_engagement_level_from_master, axis=1)
     df['current_view'] = None
     df['expected_return_date'] = df['hire_expiry_date'].dt.strftime('%d/%m/%Y')
     df['second_decision'] = None
@@ -208,6 +234,7 @@ def asset_file_generation(tidy_names=False, account_manager=None):
     return df
 
 
+# Apply Functions
 def contract_billing_amount_monthly(vehicle) -> float | None:
     if vehicle['billing_frequency'] == "Monthly":
         return round(vehicle['sales'], 2)
@@ -421,7 +448,7 @@ def calculate_contract_status(vehicle):
 def calculate_in_scope(vehicle):
     try:
         months_until_end = (((vehicle['hire_expiry_date'] - datetime.today()).days / 365) * 12) + 1
-        if months_until_end <= 18:
+        if months_until_end <= 6:
             return 'Yes'
         else:
             pass
@@ -439,4 +466,12 @@ def calculate_mileage_banding(vehicle):
         return 'Red'
     else:
         return None
+
+
+def lookup_engagement_level_from_master(vehicle):
+    global master_frame
+    try:
+        return master_frame.loc[vehicle.loc['registration']]['Engagement Level']
+    except:
+        pass
 

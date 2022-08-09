@@ -231,7 +231,7 @@ cell_format = \
                         'border': 1,
                     },
             },
-        'Product manager View':
+        'Product Manager View':
             {
                 'header_format':
                     {
@@ -247,11 +247,6 @@ cell_format = \
                         'text_wrap': False,
                         'border': 1,
                     },
-                'data_validation':
-                    {
-                        'validate': 'list',
-                        'source': ['To Be Determined'],
-                    }
             },
         'Product Manager Return Date':
             {
@@ -271,7 +266,7 @@ cell_format = \
                         'num_format': 'dd/mm/yyyy',
                     },
             },
-        'Mileage banding':
+        'Mileage Banding':
             {
                 'header_format':
                     {
@@ -1317,6 +1312,60 @@ cell_format = \
                     {
                         'text_wrap': False,
                         'border': 1,
+                    },
+            },
+        '3 Month Finance':
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1,
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                        'num_format': '£#,##0.00',
+                    },
+            },
+        '12 Month Finance':
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1,
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                        'num_format': '£#,##0.00',
+                    },
+            },
+        'Life Finance':
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1,
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                        'num_format': '£#,##0.00',
                     },
             },
     }

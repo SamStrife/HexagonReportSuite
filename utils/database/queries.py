@@ -61,7 +61,8 @@ af_vehicle_and_hire_and_customer_query = \
         af_hires['Live'].as_('live_hire'),
         af_hires['Start Mileage'].as_('hire_start_mileage'),
         af_hires['Original Hire Date'].as_('original_hire_date'),
-        af_hires['Original Start Mileage'].as_('original_hire_mileage')
+        af_hires['Original Start Mileage'].as_('original_hire_mileage'),
+        af_hires['Hire Type Name'].as_('hire_type_name'),
         )
 
 af_finance_query = \
@@ -70,10 +71,12 @@ af_finance_query = \
     .select(
         af_finance['Unique ID'].as_('finance_id'),
         af_finance['Agreement Number'].as_('finance_agreement_number'),
+        af_finance['Monthly Payment'].as_('finance_monthly_payment'),
         af_finance['Monthly Depreciation'].as_('monthly_depreciation'),
         af_finance['Net Book Value'].as_('net_book_value'),
+        af_finance['Finance Start Date'].as_('finance_start_date'),
         af_finance['Finance End Date'].as_('finance_end_date'),
-        af_finance['Live'].as_('finance_live')
+        af_finance['Live'].as_('finance_live'),
     )\
     .where(af_finance['Live'] == 'TRUE')\
 
@@ -116,27 +119,40 @@ def all_spend_split():
 def hires_for_splitter_report():
     hires = Table(db.hires)
     data = MSSQLQuery.from_(hires)\
-    .select(
-        hires['Unique ID'].as_('hire_ID'),
-        hires['Vehicle Unique ID'].as_('vehicle_ID'),
-        hires['Customer Unique ID'].as_('customer_ID'),
-        hires['Live'].as_('live'),
-        hires['Sales'].as_('sales'),
-        hires['Billing Frequency Name'].as_('frequency'),
-        hires['Agreement Number'].as_('agreement_number'),
-        hires['Hire Start Date'].as_('hire_start'),
-        hires['Hire Expiry Date'].as_('hire_expiry'),
-        hires['End Of Hire'].as_('hire_end'),
-        hires['Original Agreement Number'].as_('original_agreement_number'),
-        hires['Original Hire Date'].as_('original_hire_start_date'),
-        hires['Original Start Mileage'].as_('original_hire_start_mileage')
-    )
+        .select(
+            hires['Unique ID'].as_('hire_ID'),
+            hires['Vehicle Unique ID'].as_('vehicle_ID'),
+            hires['Customer Unique ID'].as_('customer_ID'),
+            hires['Live'].as_('live'),
+            hires['Sales'].as_('sales'),
+            hires['Billing Frequency Name'].as_('frequency'),
+            hires['Agreement Number'].as_('agreement_number'),
+            hires['Hire Start Date'].as_('hire_start'),
+            hires['Hire Expiry Date'].as_('hire_expiry'),
+            hires['End Of Hire'].as_('hire_end'),
+            hires['Original Agreement Number'].as_('original_agreement_number'),
+            hires['Original Hire Date'].as_('original_hire_start_date'),
+            hires['Original Start Mileage'].as_('original_hire_start_mileage')
+        )
     return data
 
 
-
-
-
+# Finance Splitter
+def finance_agreement_splitter_report():
+    data = MSSQLQuery\
+        .from_(af_finance)\
+        .select(
+            af_finance['Unique ID'].as_('finance_id'),
+            af_finance['Agreement Number'].as_('finance_agreement_number'),
+            af_finance['Monthly Payment'].as_('finance_monthly_payment'),
+            af_finance['Monthly Depreciation'].as_('monthly_depreciation'),
+            af_finance['Net Book Value'].as_('net_book_value'),
+            af_finance['Finance Start Date'].as_('finance_start_date'),
+            af_finance['Finance End Date'].as_('finance_end_date'),
+            af_finance['Live'].as_('finance_live'),
+            af_finance['Vehicle Unique ID'].as_('vehicle_ID'),
+        )
+    return data
 
 
 

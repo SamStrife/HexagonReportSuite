@@ -10,11 +10,11 @@ def vehicle_spend():
     pd.read_sql(single_vehicle_query, cnxn)
 
 
-def all_fleet_split():
+def all_fleet_split(dataframe):
     all_fleet_split = str(queries.all_spend_split())
     all_spend = pd.read_sql(all_fleet_split, cnxn)
     all_spend['Months Between'] = all_spend.apply(calculate_months_between_today_and_job_date, axis=1)
-    spend_split = calculate_all_spend(all_spend)
+    spend_split = calculate_all_spend(dataframe, all_spend)
     return spend_split
 
 
@@ -25,8 +25,11 @@ def calculate_months_between_today_and_job_date(vehicle):
     return months_between
 
 
-def calculate_all_spend(table):
+def calculate_all_spend(dataframe, table):
     _vehicle_spend = {}
+    for vehicle in dataframe.iterrows():
+        vehicle_id = vehicle[1].loc['vehicle_id']
+        _vehicle_spend[vehicle_id] = {'3': 0, '12': 0, 'Life': 0}
     for row in table.iterrows():
         vehicle_id = row[1][0]
         job_cost = row[1][2]

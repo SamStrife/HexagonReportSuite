@@ -20,12 +20,12 @@ load_dotenv()
 sharepoint_site_url = os.getenv("SHAREPOINTASSETFILESITEURL")
 sharepoint_username = os.getenv("SHAREPOINTASSETFILEUSER")
 sharepoint_password = os.getenv("SHAREPOINTASSETFILEPASSWORD")
-sharepoint_file_path = os.getenv("SHAREPOINTASSETFILEFILEURL")
+sharepoint_file_path = os.getenv("SHAREPOINTASSETMASTERFILEFILEURL")
 
 master_frame = None
 
 
-def asset_file_generation(tidy_names=False, account_manager=None):
+def asset_file_generation(tidy_names: bool = False, account_manager: bool = None):
     # Get Master File For Comparison Purposes
     global master_frame
     ctx = ClientContext(sharepoint_site_url).with_credentials(UserCredential(sharepoint_username,sharepoint_password))

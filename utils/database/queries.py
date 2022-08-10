@@ -21,6 +21,8 @@ af_hires = Table(db.hires)
 af_customers = Table(db.customers)
 af_addresses = Table(db.postal_addresses)
 af_finance = Table(db.finance)
+af_rfl = Table(db.rfl)
+
 
 af_vehicle_and_hire_and_customer_query = \
     MSSQLQuery\
@@ -115,7 +117,7 @@ def all_spend_split():
     return data
 
 
-#Hire Queries
+# Hire Queries
 def hires_for_splitter_report():
     hires = Table(db.hires)
     data = MSSQLQuery.from_(hires)\
@@ -155,7 +157,20 @@ def finance_agreement_splitter_report():
     return data
 
 
-
+# RFL Splitter
+def rfl_splitter_report():
+    data = MSSQLQuery\
+        .from_(af_rfl)\
+        .select(
+            af_rfl['Unique ID'].as_('rfl_id'),
+            af_rfl['Price'].as_('price'),
+            af_rfl['Road Fund Months'].as_('months'),
+            af_rfl['Due Date'].as_('rfl_start_date'),
+            af_rfl['Expiry Date'].as_('rfl_end_date'),
+            af_rfl['Tax Band name'].as_('rfl_band'),
+            af_rfl['Vehicle Unique ID'].as_('vehicle_ID'),
+        )
+    return data
 
 
 

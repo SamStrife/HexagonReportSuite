@@ -43,9 +43,9 @@ def calculate_days_on_rent(hire) -> int:
 
 def calculate_daily_rate(hire) -> float | None:
     if hire['frequency'] == "Weekly":
-        return round(hire['sales'] / 5, 2)
+        return round(hire['sales'] / 7, 2)
     elif hire['frequency'] == "Monthly":
-        return round(((hire['sales'] * 12) / 52) / 5, 2)
+        return round(((hire['sales'] * 12) / 52) / 7, 2)
     elif hire['frequency'] == 'Daily':
         return round(hire['sales'], 2)
     else:

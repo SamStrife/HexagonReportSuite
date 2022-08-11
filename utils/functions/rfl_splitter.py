@@ -9,24 +9,25 @@ def report_for_rfl_splitter(dataframe):
     rfls = pd.read_sql(all_rfls, cnxn)
     rfls['days_open'] = rfls.apply(calculate_days_open, axis=1)
     rfls['daily_rate'] = rfls.apply(calculate_daily_rate, axis=1)
+    rfls['live'] = rfls.apply(calculate_live_status, axis=1)
     split = calculate_revenue_split(dataframe, rfls)
     return split
 
 
-# def calculate_individual_agreement_costs(vehicle_id):
-#     all_agreements = str(queries.finance_agreement_splitter_report())
-#     agreements = pd.read_sql(all_agreements, cnxn)
-#     agreements['days_on_rent'] = agreements.apply(calculate_days_open, axis=1)
-#     agreements['daily_rate'] = agreements.apply(calculate_daily_rate, axis=1)
-#     vehicle_revenue = []
-#     for row in agreements.iterrows():
-#         vehicle_id_number = row[1].loc['vehicle_ID']
-#         daily_rate = row[1].loc['daily_rate']
-#         days_on_rent = row[1].loc['days_on_rent']
-#         agreement_number = row[1].loc['finance_id']
-#         if vehicle_id == vehicle_id_number:
-#             vehicle_revenue.append({agreement_number: daily_rate * days_on_rent, 'Days on rent: ': days_on_rent, 'Daily Rate: ': daily_rate})
-#     return vehicle_revenue
+def calculate_individual_rfl_costs(vehicle_id):
+    all_agreements = str(queries.rfl_splitter_report())
+    agreements = pd.read_sql(all_agreements, cnxn)
+    agreements['days_on_rent'] = agreements.apply(calculate_days_open, axis=1)
+    agreements['daily_rate'] = agreements.apply(calculate_daily_rate, axis=1)
+    vehicle_revenue = []
+    for row in agreements.iterrows():
+        vehicle_id_number = row[1].loc['vehicle_ID']
+        daily_rate = row[1].loc['daily_rate']
+        days_on_rent = row[1].loc['days_on_rent']
+        agreement_number = row[1].loc['rfl_id']
+        if vehicle_id == vehicle_id_number:
+            vehicle_revenue.append({agreement_number: daily_rate * days_on_rent, 'Days on rent: ': days_on_rent, 'Daily Rate: ': daily_rate})
+    return vehicle_revenue
 
 
 def calculate_days_open(rfl) -> int:
@@ -37,11 +38,26 @@ def calculate_days_open(rfl) -> int:
 
 
 def calculate_daily_rate(rfl) -> float | None:
-    monthly_payment = rfl['price']/rfl['months']
-    return round(((monthly_payment * 12) / 52) / 5, 2)
+    monthly_payment = None
+    try:
+        monthly_payment = rfl['price']/rfl['months']
+    except:
+        pass
+
+    try:
+        return round(((monthly_payment * 12) / 52) / 7, 2)
+    except:
+        pass
 
 
-# TODO: NEED TO DETERMINE IF RFL IS CURRENTLY LIVE FOR DAYS CALCULATION BY END DATE IN FUTURE
+def calculate_live_status(vehicle):
+    rfl_end_date = vehicle['rfl_end_date']
+    days_until_expiry = rfl_end_date - datetime.now()
+    if days_until_expiry.days >= 0:
+        return True
+    else:
+        return False
+
 
 def calculate_revenue_split(dataframe, table) -> {}:
     vehicle_revenue = {}
@@ -50,10 +66,10 @@ def calculate_revenue_split(dataframe, table) -> {}:
         vehicle_revenue[vehicle_id] = {'3': 0, '12': 0, 'Life': 0}
     for row in table.iterrows():
         vehicle_id = row[1].loc['vehicle_ID']
-        live = row[1].loc['finance_live']
+        live = row[1].loc['live']
         daily_rate = row[1].loc['daily_rate']
         days_on_rent = row[1].loc['days_open']
-        hire_end = row[1].loc['finance_end_date']
+        hire_end = row[1].loc['rfl_end_date']
         if vehicle_id not in vehicle_revenue.keys():
             vehicle_revenue[vehicle_id] = {'3': 0, '12': 0, 'Life': 0}
         if live:

@@ -1368,4 +1368,58 @@ cell_format = \
                         'num_format': '£#,##0.00',
                     },
             },
+        '3 Month RFL':
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1,
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                        'num_format': '£#,##0.00',
+                    },
+            },
+        '12 Month RFL':
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1,
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                        'num_format': '£#,##0.00',
+                    },
+            },
+        'Life RFL':
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#074f6b',
+                        'color': '#ffffff',
+                        'border': 1,
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                        'num_format': '£#,##0.00',
+                    },
+            },
     }

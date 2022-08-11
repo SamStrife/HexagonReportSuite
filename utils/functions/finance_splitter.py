@@ -41,7 +41,7 @@ def calculate_days_open(agreement) -> int:
 
 
 def calculate_daily_rate(hire) -> float | None:
-    return round(((hire['finance_monthly_payment'] * 12) / 52) / 5, 2)
+    return round(((hire['finance_monthly_payment'] * 12) / 52) / 7, 2)
 
 
 def calculate_revenue_split(dataframe, table) -> {}:

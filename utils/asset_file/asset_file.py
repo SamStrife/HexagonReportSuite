@@ -84,18 +84,18 @@ def asset_file_generation(tidy_names: bool = False, account_manager: bool = None
     df['hexagon_ancillary_fleet'] = df.apply(count_fleet, args=(customer_fleet_numbers, "Ancillary Unit"), axis=1)
     df['hexagon_undefined_fleet'] = df.apply(count_fleet, args=(customer_fleet_numbers, "Undefined"), axis=1)
     df['total_customer_fleet'] = df.apply(total_customer_fleet, args=(customer_fleet_numbers,), axis=1)
-    df['3_month_spend'] = df.apply(lookup_spend_split,args=(spend_split, '3'), axis=1)
-    df['12_month_spend'] = df.apply(lookup_spend_split, args=(spend_split, '12'), axis=1)
-    df['life_spend'] = df.apply(lookup_spend_split, args=(spend_split, 'Life'), axis=1)
-    df['3_month_revenue'] = df.apply(lookup_revenue_split,args=(revenue_split, '3'), axis=1)
-    df['12_month_revenue'] = df.apply(lookup_revenue_split, args=(revenue_split, '12'), axis=1)
-    df['life_revenue'] = df.apply(lookup_revenue_split, args=(revenue_split, 'Life'), axis=1)
-    df['3_month_finance'] = df.apply(lookup_finance_split, args=(finance_split,'3'), axis=1)
-    df['12_month_finance'] = df.apply(lookup_finance_split, args=(finance_split, '12'), axis=1)
-    df['life_finance'] = df.apply(lookup_finance_split, args=(finance_split, 'Life'), axis=1)
-    df['3_month_rfl'] = df.apply(lookup_rfl_split, args=(rfl_split,'3'), axis=1)
-    df['12_month_rfl'] = df.apply(lookup_rfl_split, args=(rfl_split, '12'), axis=1)
-    df['life_rfl'] = df.apply(lookup_rfl_split, args=(rfl_split, 'Life'), axis=1)
+    df['3_month_spend'] = df.apply(lookup_split,args=(spend_split, '3'), axis=1)
+    df['12_month_spend'] = df.apply(lookup_split, args=(spend_split, '12'), axis=1)
+    df['life_spend'] = df.apply(lookup_split, args=(spend_split, 'Life'), axis=1)
+    df['3_month_revenue'] = df.apply(lookup_split,args=(revenue_split, '3'), axis=1)
+    df['12_month_revenue'] = df.apply(lookup_split, args=(revenue_split, '12'), axis=1)
+    df['life_revenue'] = df.apply(lookup_split, args=(revenue_split, 'Life'), axis=1)
+    df['3_month_finance'] = df.apply(lookup_split, args=(finance_split,'3'), axis=1)
+    df['12_month_finance'] = df.apply(lookup_split, args=(finance_split, '12'), axis=1)
+    df['life_finance'] = df.apply(lookup_split, args=(finance_split, 'Life'), axis=1)
+    df['3_month_rfl'] = df.apply(lookup_split, args=(rfl_split,'3'), axis=1)
+    df['12_month_rfl'] = df.apply(lookup_split, args=(rfl_split, '12'), axis=1)
+    df['life_rfl'] = df.apply(lookup_split, args=(rfl_split, 'Life'), axis=1)
     df['3_month_margin'] = df.apply(lambda x: x['3_month_revenue'] - (x['3_month_spend'] + x['3_month_finance'] + + x['3_month_rfl']), axis=1)
     df['3_month_margin_%'] = df.apply(three_month_margin_percent, axis=1)
     df['12_month_margin'] = df.apply(lambda x: x['12_month_revenue'] - (x['12_month_spend'] + x['12_month_finance'] + x['12_month_rfl']), axis=1)
@@ -384,28 +384,7 @@ def total_customer_fleet(vehicle, lookup_table):
         return None
 
 
-def lookup_spend_split(vehicle, lookup_table, month):
-    try:
-        return lookup_table[vehicle['vehicle_id']][month]
-    except:
-        return None
-
-
-def lookup_revenue_split(vehicle, lookup_table, month):
-    try:
-        return lookup_table[vehicle['vehicle_id']][month]
-    except:
-        return None
-
-
-def lookup_finance_split(vehicle, lookup_table, month):
-    try:
-        return lookup_table[vehicle['vehicle_id']][month]
-    except:
-        return None
-
-
-def lookup_rfl_split(vehicle, lookup_table, month):
+def lookup_split(vehicle, lookup_table, month):
     try:
         return lookup_table[vehicle['vehicle_id']][month]
     except:

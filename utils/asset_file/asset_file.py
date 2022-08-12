@@ -15,6 +15,7 @@ from utils.functions.functions import determine_vehicle_power_type
 from utils.functions.rfl_splitter import report_for_rfl_splitter
 from utils.functions.vehicle_spend import all_fleet_split
 from utils.functions.hire_splitter import report_for_hire_splitter
+import utils.asset_file.excel_column_orders as co
 
 
 load_dotenv()
@@ -26,7 +27,11 @@ sharepoint_file_path = os.getenv("SHAREPOINTASSETMASTERFILEFILEURL")
 master_frame = None
 
 
-def asset_file_generation(tidy_names: bool = False, account_manager: bool = None):
+def asset_file_generation(tidy_names: bool = False,
+                          account_manager: bool = None,
+                          stood_fleet: bool = False,
+                          existing_fleet: bool = True,
+                          layout = None):
     # Get Master File For Comparison Purposes
     global master_frame
     ctx = ClientContext(sharepoint_site_url).with_credentials(UserCredential(sharepoint_username,sharepoint_password))
@@ -56,8 +61,14 @@ def asset_file_generation(tidy_names: bool = False, account_manager: bool = None
         left_on="last_finance_unique_id",
         right_on="finance_id")
 
+    if existing_fleet:
+        df = df[~df[['vehicle_status']].isin(['No longer on fleet', 'Vehicle On Order']).any(axis=1)]
+
+    if stood_fleet:
+        df = df[df['customer_name'] == "Not On Hire"]
+
     if account_manager:
-        df = df[df['relationship_manager'] == account_manager]
+        df = df[~df['relationship_manager'] == account_manager]
 
     df['registration_2'] = df['registration']
     df['vehicle_type_2'] = df['vehicle_type']
@@ -72,8 +83,7 @@ def asset_file_generation(tidy_names: bool = False, account_manager: bool = None
     df['daily_mileage'] = df.apply(daily_mileage, axis=1)
     df['projected_end_mileage'] = df.apply(projected_end_mileage, axis=1)
     df['rated_mileage_at_reading_date'] = df.apply(rated_mileage_at_reading_date, axis=1)
-    df['over_under_rated_mileage_number'] = \
-        df.apply(lambda x: x['mileage'] - x['rated_mileage_at_reading_date'], axis=1)
+    df['over_under_rated_mileage_number'] = df.apply(over_under_rated_mileage_number, axis=1)
     df['over_under_rated_mileage_percentage'] = df.apply(over_under_mileage_percent, axis=1)
     df['power_type'] = df.apply(determine_vehicle_power_type, axis=1)
 
@@ -129,25 +139,11 @@ def asset_file_generation(tidy_names: bool = False, account_manager: bool = None
     df['finance_end_date'] = df['finance_end_date'].dt.strftime('%d/%m/%Y')
 
     # Tidying DataFrame
-    df = df[['customer_group', 'relationship_manager', 'vehicle_type', 'registration', 'hire_expiry_date',
-             'customer_status', 'in_scope', 'engagement_level', 'current_view', 'expected_return_date',
-             'second_decision', 'expected_return_date_2', 'plan_view', 'product_manager_view',
-             'product_manager_return_date', 'mileage_banding', 'up_priced', 'latest_increase', 'effective_date',
-             'customer_acc_number', 'customer_name', 'customer_group', 'segment', 'hexagon_powered_fleet',
-             'hexagon_trailer_fleet', 'hexagon_ancillary_fleet', 'hexagon_undefined_fleet',
-             'total_customer_fleet', 'registration_2', 'vehicle_status', 'power_type', 'vehicle_on_fleet_date',
-             'years_in_service', 'manufacturer', 'model', 'vehicle_type_2', 'parent_type', 'fridge',
-             'supplier_name', 'supplier_post_code', 'mileage', 'mileage_date', 'daily_mileage',
-             'projected_end_mileage', 'contract_annual_mileage', 'rated_mileage_at_reading_date',
-             'over_under_rated_mileage_number', 'over_under_rated_mileage_percentage', 'financer', 'capital',
-             'net_book_value', 'residual_value', 'finance_end_date', 'monthly_depreciation', 'hire_start_date',
-             'original_hire_date', 'Contract_Billing_Amount_Monthly', 'Contract_Billing_Amount_Annually',
-             'Contract_Billing_Amount_Weekly', 'billing_frequency', 'hire_expiry_date_2',
-             'Current_Contract_Expiry_Month', 'Current_Contract_Expiry_Year', 'contract_status',
-             '3_month_revenue', '3_month_spend', '3_month_finance', '3_month_rfl', '3_month_margin', '3_month_margin_%',
-             '12_month_revenue', '12_month_spend', '12_month_finance', '12_month_rfl', '12_month_margin',
-             '12_month_margin_%', 'life_revenue', 'life_spend', 'life_finance', 'life_rfl', 'life_margin',
-             'life_margin_%']]
+
+    if not layout:
+        df = df[co.default_order]
+    else:
+        pass
 
     rename_dictionary = \
     {
@@ -347,6 +343,13 @@ def rated_mileage_at_reading_date(vehicle):
         return None
 
 
+def over_under_rated_mileage_number(vehicle):
+    try:
+        return  vehicle['mileage'] - vehicle['rated_mileage_at_reading_date']
+    except:
+        pass
+
+
 def over_under_mileage_percent(vehicle):
     try:
         return round((vehicle['rated_mileage_at_reading_date'] / vehicle['mileage']) / 100)
@@ -451,14 +454,17 @@ def calculate_in_scope(vehicle):
 
 def calculate_mileage_banding(vehicle):
     over_under_mileage = vehicle['over_under_rated_mileage_number']
-    if over_under_mileage <= 0:
-        return 'Green'
-    elif over_under_mileage > 0 and over_under_mileage < 50000:
-        return 'Amber'
-    elif over_under_mileage >= 50000:
-        return 'Red'
-    else:
-        return None
+    try:
+        if over_under_mileage <= 0:
+            return 'Green'
+        elif over_under_mileage > 0 and over_under_mileage < 50000:
+            return 'Amber'
+        elif over_under_mileage >= 50000:
+            return 'Red'
+        else:
+            return None
+    except:
+        pass
 
 
 def lookup_from_master(vehicle, lookup):

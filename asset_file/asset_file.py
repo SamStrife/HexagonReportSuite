@@ -16,6 +16,8 @@ from utils.functions.rfl_splitter import report_for_rfl_splitter
 from utils.functions.vehicle_spend import all_fleet_split
 from utils.functions.hire_splitter import report_for_hire_splitter
 
+from utils.excel_exporting.column_rename_dcitionary import excel_rename_dictionary
+
 
 load_dotenv()
 sharepoint_site_url = os.getenv("SHAREPOINTASSETFILESITEURL")
@@ -26,7 +28,7 @@ sharepoint_file_path = os.getenv("SHAREPOINTASSETMASTERFILEFILEURL")
 master_frame = None
 
 
-def asset_file_generation(tidy_names: bool = False, account_manager: bool = None):
+def asset_file_generation(tidy_names: bool = False, account_manager: bool = None, requester_format: str = None):
     # Get Master File For Comparison Purposes
     global master_frame
     ctx = ClientContext(sharepoint_site_url).with_credentials(UserCredential(sharepoint_username,sharepoint_password))
@@ -128,115 +130,49 @@ def asset_file_generation(tidy_names: bool = False, account_manager: bool = None
     df['original_hire_date'] = df['original_hire_date'].dt.strftime('%d/%m/%Y')
     df['finance_end_date'] = df['finance_end_date'].dt.strftime('%d/%m/%Y')
 
-    # Tidying DataFrame
-    df = df[['customer_group', 'relationship_manager', 'vehicle_type', 'registration', 'hire_expiry_date',
-             'customer_status', 'in_scope', 'engagement_level', 'current_view', 'expected_return_date',
-             'second_decision', 'expected_return_date_2', 'plan_view', 'product_manager_view',
-             'product_manager_return_date', 'mileage_banding', 'up_priced', 'latest_increase', 'effective_date',
-             'customer_acc_number', 'customer_name', 'customer_group', 'segment', 'hexagon_powered_fleet',
-             'hexagon_trailer_fleet', 'hexagon_ancillary_fleet', 'hexagon_undefined_fleet',
-             'total_customer_fleet', 'registration_2', 'vehicle_status', 'power_type', 'vehicle_on_fleet_date',
-             'years_in_service', 'manufacturer', 'model', 'vehicle_type_2', 'parent_type', 'fridge',
-             'supplier_name', 'supplier_post_code', 'mileage', 'mileage_date', 'daily_mileage',
-             'projected_end_mileage', 'contract_annual_mileage', 'rated_mileage_at_reading_date',
-             'over_under_rated_mileage_number', 'over_under_rated_mileage_percentage', 'financer', 'capital',
-             'net_book_value', 'residual_value', 'finance_end_date', 'monthly_depreciation', 'hire_start_date',
-             'original_hire_date', 'Contract_Billing_Amount_Monthly', 'Contract_Billing_Amount_Annually',
-             'Contract_Billing_Amount_Weekly', 'billing_frequency', 'hire_expiry_date_2',
-             'Current_Contract_Expiry_Month', 'Current_Contract_Expiry_Year', 'contract_status',
-             '3_month_revenue', '3_month_spend', '3_month_finance', '3_month_rfl', '3_month_margin', '3_month_margin_%',
-             '12_month_revenue', '12_month_spend', '12_month_finance', '12_month_rfl', '12_month_margin',
-             '12_month_margin_%', 'life_revenue', 'life_spend', 'life_finance', 'life_rfl', 'life_margin',
-             'life_margin_%']]
+    # Re-order columns based on required return
+    if requester_format == "jem_bible":
+        df = df[['customer_group', 'relationship_manager', 'vehicle_type', 'registration', 'hire_expiry_date',
+                 'customer_status', 'mileage_banding', 'customer_name', 'customer_group', 'segment',
+                 'hexagon_powered_fleet', 'hexagon_trailer_fleet', 'hexagon_ancillary_fleet', 'hexagon_undefined_fleet',
+                 'total_customer_fleet', 'registration_2', 'vehicle_status', 'power_type', 'vehicle_on_fleet_date',
+                 'years_in_service', 'manufacturer', 'model', 'vehicle_type_2', 'parent_type', 'fridge',
+                 'supplier_name', 'supplier_post_code', 'mileage', 'mileage_date', 'daily_mileage',
+                 'projected_end_mileage', 'contract_annual_mileage', 'rated_mileage_at_reading_date',
+                 'over_under_rated_mileage_number', 'over_under_rated_mileage_percentage', 'financer', 'capital',
+                 'net_book_value', 'residual_value', 'finance_end_date', 'monthly_depreciation', 'hire_start_date',
+                 'original_hire_date', 'Contract_Billing_Amount_Monthly', 'Contract_Billing_Amount_Annually',
+                 'Contract_Billing_Amount_Weekly', 'billing_frequency', 'hire_expiry_date_2',
+                 'Current_Contract_Expiry_Month', 'Current_Contract_Expiry_Year', 'contract_status',
+                 '3_month_revenue', '3_month_spend', '3_month_finance', '3_month_rfl', '3_month_margin',
+                 '3_month_margin_%',
+                 '12_month_revenue', '12_month_spend', '12_month_finance', '12_month_rfl', '12_month_margin',
+                 '12_month_margin_%', 'life_revenue', 'life_spend', 'life_finance', 'life_rfl', 'life_margin',
+                 'life_margin_%']]
+    else:
+        df = df[['customer_group', 'relationship_manager', 'vehicle_type', 'registration', 'hire_expiry_date',
+                 'customer_status', 'in_scope', 'engagement_level', 'current_view', 'expected_return_date',
+                 'second_decision', 'expected_return_date_2', 'plan_view', 'product_manager_view',
+                 'product_manager_return_date', 'mileage_banding', 'up_priced', 'latest_increase', 'effective_date',
+                 'customer_acc_number', 'customer_name', 'customer_group', 'segment', 'hexagon_powered_fleet',
+                 'hexagon_trailer_fleet', 'hexagon_ancillary_fleet', 'hexagon_undefined_fleet',
+                 'total_customer_fleet', 'registration_2', 'vehicle_status', 'power_type', 'vehicle_on_fleet_date',
+                 'years_in_service', 'manufacturer', 'model', 'vehicle_type_2', 'parent_type', 'fridge',
+                 'supplier_name', 'supplier_post_code', 'mileage', 'mileage_date', 'daily_mileage',
+                 'projected_end_mileage', 'contract_annual_mileage', 'rated_mileage_at_reading_date',
+                 'over_under_rated_mileage_number', 'over_under_rated_mileage_percentage', 'financer', 'capital',
+                 'net_book_value', 'residual_value', 'finance_end_date', 'monthly_depreciation', 'hire_start_date',
+                 'original_hire_date', 'Contract_Billing_Amount_Monthly', 'Contract_Billing_Amount_Annually',
+                 'Contract_Billing_Amount_Weekly', 'billing_frequency', 'hire_expiry_date_2',
+                 'Current_Contract_Expiry_Month', 'Current_Contract_Expiry_Year', 'contract_status',
+                 '3_month_revenue', '3_month_spend', '3_month_finance', '3_month_rfl', '3_month_margin', '3_month_margin_%',
+                 '12_month_revenue', '12_month_spend', '12_month_finance', '12_month_rfl', '12_month_margin',
+                 '12_month_margin_%', 'life_revenue', 'life_spend', 'life_finance', 'life_rfl', 'life_margin',
+                 'life_margin_%']]
 
-    rename_dictionary = \
-    {
-        'vehicle_status': 'Vehicle Status',
-        'customer_group': 'Customer Group',
-        'relationship_manager': 'Account Manager',
-        'vehicle_type': 'Vehicle Type',
-        'registration': 'Registration',
-        'hire_expiry_date': 'Hire End Date',
-        'customer_status': 'Customer Status',
-        'in_scope': 'In Scope?',
-        'engagement_level': 'Engagement Level',
-        'current_view': 'Current View',
-        'expected_return_date': 'Expected Return Date',
-        'second_decision': '2nd Decision',
-        'expected_return_date_2': 'Expected Return Date',
-        'plan_view': 'Plan View',
-        'product_manager_view': 'Product Manager View',
-        'product_manager_return_date': 'Product Manager Return Date',
-        'mileage_banding': 'Mileage Banding',
-        'up_priced': 'Up Priced',
-        'latest_increase': 'Latest Increase',
-        'effective_date': 'Effective Date',
-        'customer_acc_number': 'Customer Account Number',
-        'customer_name': 'Customer Name',
-        'segment': 'Segment',
-        'hexagon_powered_fleet': 'Hexagon Powered Fleet',
-        'hexagon_trailer_fleet': 'Hexagon Trailer Fleet',
-        'hexagon_ancillary_fleet': 'Hexagon Ancillary Fleet',
-        'hexagon_undefined_fleet': 'Hexagon Undefined Fleet',
-        'total_customer_fleet': 'Total Hexagon Fleet',
-        'power_type': 'Power Type',
-        'vehicle_on_fleet_date': 'Vehicle On Fleet Date',
-        'years_in_service': 'Years In Service',
-        'manufacturer': 'Manufacturer',
-        'model': 'Model',
-        'parent_type': 'Parent vehicle Type',
-        'fridge': 'Fridge?',
-        'supplier_name': 'Supplier name',
-        'supplier_post_code': 'Supplier Post Code',
-        'mileage': 'Current Mileage',
-        'mileage_date': 'Mileage Reading Date',
-        'daily_mileage': 'Daily Mileage',
-        'projected_end_mileage': 'Project Mileage At Contract End',
-        'contract_annual_mileage': 'Contract Annual Mileage Allowance',
-        'rated_mileage_at_reading_date': 'Rated Mileage @ Reading Date',
-        'over_under_rated_mileage_number': 'Over/Under Rated Mileage @ Reading Date',
-        'over_under_rated_mileage_percentage': 'Over/Under Rated Mileage % @ Reading Date',
-        'financer': 'Financer',
-        'capital': 'Capital',
-        'net_book_value': 'NBV',
-        'residual_value': 'Residual',
-        'finance_end_date': 'Finance End Date',
-        'monthly_depreciation': 'Monthly Depreciation',
-        'hire_start_date': 'Hire Start Date',
-        'original_hire_date': 'Original Hire Start Date',
-        'Contract_Billing_Amount_Monthly': 'Contract Billing Amount(Monthly)',
-        'Contract_Billing_Amount_Annually': 'Contract Billing Amount(Annually)',
-        'Contract_Billing_Amount_Weekly': 'Contract Billing Amount(Weekly)',
-        'billing_frequency': 'Billing Frequency',
-        'Current_Contract_Expiry_Month': 'Current Contract Expiry Month',
-        'Current_Contract_Expiry_Year': 'Current Contract Expiry Year',
-        'contract_status': 'Contract Status',
-        '3_month_revenue': '3 Month Revenue',
-        '3_month_spend': '3 Month Expenditure',
-        '3_month_margin': '3 Month Margin',
-        '3_month_margin_%': '3 Month Margin %',
-        '12_month_revenue': '12 Month Revenue',
-        '12_month_spend': '12 Month Expenditure',
-        '12_month_margin': '12 Month Margin',
-        '12_month_margin_%': '12 Month Margin %',
-        'life_revenue': 'Life Revenue',
-        'life_spend': 'Life Expenditure',
-        'life_margin': 'Life Margin',
-        'life_margin_%': 'Life Margin %',
-        'registration_2': 'Registration 2',
-        'vehicle_type_2': 'Vehicle Type 2',
-        'hire_expiry_date_2': 'Hire End Date 2',
-        '3_month_finance': '3 Month Finance',
-        '12_month_finance': '12 Month Finance',
-        'life_finance': 'Life Finance',
-        '3_month_rfl': '3 Month RFL',
-        '12_month_rfl': '12 Month RFL',
-        'life_rfl': 'Life RFL',
-    }
-
-    # Check to see if the columns need renaming or not
+    # Check to see if the columns need renaming or not. If so, use the Excel Rename Dictionary To Compare Values
     if tidy_names:
-        df.rename(columns=rename_dictionary, inplace=True)
+        df.rename(columns=excel_rename_dictionary, inplace=True)
 
     return df
 

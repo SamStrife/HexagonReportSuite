@@ -1,5 +1,7 @@
-from utils.asset_file.export_af_to_excel import export_af_to_excel
+from asset_file.export_af_to_excel import export_af_to_excel
+export_af_to_excel(requester_format="jem_bible")
 
 
-export_af_to_excel()
+
+
 

@@ -6,7 +6,7 @@ from utils.database.connection import cnxn
 def get_vehicle_details(registration):
     data = pd.read_sql(
         f"Select {column_selectors.vehicle_details_for_hexreports}  "
-        f"from {databases.vehicles} "
+        f"from { databases.vehicles} "
         f"where \"Vehicle Registration\" = '{registration}';", cnxn)
     return data
 

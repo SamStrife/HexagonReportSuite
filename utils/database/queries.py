@@ -15,6 +15,9 @@ vehicle_details_for_hexreports = f"Select {cs.vehicle_details_for_hexreports} fr
 supplier_spend = f"Select {cs.supplier_spend_columns} from {db.jobs};"
 derby_yard_sheet = f"Select {cs.yard_sheet} from {db.vehicles};"
 
+# Generic Tables
+vehicles = Table(db.vehicles)
+
 # Asset File Queries
 af_vehicles = Table(db.vehicles)
 af_hires = Table(db.hires)
@@ -170,6 +173,21 @@ def rfl_splitter_report():
             af_rfl['Tax Band name'].as_('rfl_band'),
             af_rfl['Vehicle Unique ID'].as_('vehicle_ID'),
         )
+    return data
+
+
+# Vehicles On Fleet
+def vehicles_on_fleet():
+    data = MSSQLQuery\
+        .from_(vehicles)\
+        .select(
+            vehicles['Vehicle Registration'].as_('Registration'),
+            vehicles['Vehicle Status Name'].as_('Status'),
+            vehicles['Next MOT Date'].as_('MOTExpiry'),
+            vehicles['Customer Name'].as_('Customer'),
+        )\
+        .where(vehicles['Vehicle Status Name'] != "Vehicle On Order ")\
+        .where(vehicles['Vehicle Status Name'] != "No longer on fleet")
     return data
 
 

@@ -81,4 +81,6 @@ excel_rename_dictionary = \
         '3_month_rfl': '3 Month RFL',
         '12_month_rfl': '12 Month RFL',
         'life_rfl': 'Life RFL',
+        'customer_name_2': 'Customer Name 2',
+        'hire_start_date_2': 'Hire Start Date 2',
     }

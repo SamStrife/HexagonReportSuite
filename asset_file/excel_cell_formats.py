@@ -17,6 +17,23 @@ cell_format = \
                     'border': 1,
                 },
             },
+        'Customer Name':
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#383837',
+                        'color': '#ffffff',
+                        'border': 1,
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                    },
+            },
         'Account Manager':
             {
                 'header_format':
@@ -66,6 +83,24 @@ cell_format = \
                     {
                         'text_wrap': False,
                         'border': 1,
+                    },
+            },
+        'Hire Start Date':
+            {
+                'header_format':
+                    {
+                        'bold': True,
+                        'text_wrap': False,
+                        'valign': 'top',
+                        'fg_color': '#383837',
+                        'color': '#ffffff',
+                        'border': 1,
+                    },
+                'data_format':
+                    {
+                        'text_wrap': False,
+                        'border': 1,
+                        'num_format': 'dd/mm/yyyy',
                     },
             },
         'Hire End Date':
@@ -352,7 +387,7 @@ cell_format = \
                         'border': 1,
                     },
             },
-        'Customer Name':
+        'Customer Name 2':
             {
                 'header_format':
                     {
@@ -766,7 +801,7 @@ cell_format = \
                     {
                         'text_wrap': False,
                         'border': 1,
-                        'num_format': '#,##0',
+                        'num_format': '[Red]0%;-0%',
                     },
             },
         'Financer':
@@ -872,7 +907,7 @@ cell_format = \
                         'border': 1,
                     },
             },
-        'Hire Start Date':
+        'Hire Start Date 2':
             {
                 'header_format':
                     {

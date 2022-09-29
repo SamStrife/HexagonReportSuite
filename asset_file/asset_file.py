@@ -63,6 +63,8 @@ def asset_file_generation(tidy_names: bool = False, account_manager: bool = None
 
     df['registration_2'] = df['registration']
     df['vehicle_type_2'] = df['vehicle_type']
+    df['customer_name_2'] = df['customer_name']
+    df['hire_start_date_2'] = df['hire_start_date'].dt.strftime('%d/%m/%Y')
     df['hire_expiry_date_2'] = df['hire_expiry_date'].dt.strftime('%d/%m/%Y')
     df['Current_Contract_Expiry_Month'] = df.apply(lambda x: x['hire_expiry_date'].month, axis=1)
     df['Current_Contract_Expiry_Year'] = df.apply(lambda x: x['hire_expiry_date'].year, axis=1)
@@ -150,18 +152,18 @@ def asset_file_generation(tidy_names: bool = False, account_manager: bool = None
                  '12_month_margin_%', 'life_revenue', 'life_spend', 'life_finance', 'life_rfl', 'life_margin',
                  'life_margin_%']]
     else:
-        df = df[['customer_group', 'relationship_manager', 'vehicle_type', 'registration', 'hire_expiry_date',
+        df = df[['customer_group', 'customer_name', 'relationship_manager', 'vehicle_type', 'registration','hire_start_date', 'hire_expiry_date',
                  'customer_status', 'in_scope', 'engagement_level', 'current_view', 'expected_return_date',
                  'second_decision', 'expected_return_date_2', 'plan_view', 'product_manager_view',
-                 'product_manager_return_date', 'mileage_banding', 'up_priced', 'latest_increase', 'effective_date',
-                 'customer_acc_number', 'customer_name', 'customer_group', 'segment', 'hexagon_powered_fleet',
+                 'product_manager_return_date', 'mileage_banding', 'up_priced', 'latest_increase', 'effective_date', 'customer_name_2',
+                 'customer_acc_number', 'customer_group', 'segment', 'hexagon_powered_fleet',
                  'hexagon_trailer_fleet', 'hexagon_ancillary_fleet', 'hexagon_undefined_fleet',
                  'total_customer_fleet', 'registration_2', 'vehicle_status', 'power_type', 'vehicle_on_fleet_date',
                  'years_in_service', 'manufacturer', 'model', 'vehicle_type_2', 'parent_type', 'fridge',
                  'supplier_name', 'supplier_post_code', 'mileage', 'mileage_date', 'daily_mileage',
                  'projected_end_mileage', 'contract_annual_mileage', 'rated_mileage_at_reading_date',
                  'over_under_rated_mileage_number', 'over_under_rated_mileage_percentage', 'financer', 'capital',
-                 'net_book_value', 'residual_value', 'finance_end_date', 'monthly_depreciation', 'hire_start_date',
+                 'net_book_value', 'residual_value', 'finance_end_date', 'monthly_depreciation', 'hire_start_date_2',
                  'original_hire_date', 'Contract_Billing_Amount_Monthly', 'Contract_Billing_Amount_Annually',
                  'Contract_Billing_Amount_Weekly', 'billing_frequency', 'hire_expiry_date_2',
                  'Current_Contract_Expiry_Month', 'Current_Contract_Expiry_Year', 'contract_status',
@@ -285,7 +287,7 @@ def rated_mileage_at_reading_date(vehicle):
 
 def over_under_mileage_percent(vehicle):
     try:
-        return round((vehicle['rated_mileage_at_reading_date'] / vehicle['mileage']) / 100)
+        return vehicle['mileage'] / vehicle['over_under_rated_mileage_number']
     except:
         return None
 
